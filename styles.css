@@ -2,14 +2,18 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background: #F8F9FA;
-    color: #333;
+    background: #F0F4F8; /* Changed from white/light gray to subtle blue-gray for visual appeal */
+    color: #333; /* Dark text for readability */
 }
 
 header {
-    background: #007BFF;
+    background: #007BFF; /* Blue header */
     color: white;
     padding: 1em;
+    position: sticky; /* New: Sticks to top on scroll */
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* New: Subtle shadow effect */
 }
 
 nav {
@@ -21,7 +25,7 @@ nav {
 }
 
 .logo {
-    height: 50px; /* Adjust based on your logo size */
+    height: 40px; /* Adjusted for fit */
     width: auto;
 }
 
@@ -34,12 +38,19 @@ ul {
 a {
     color: white;
     text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease; /* New: Smooth hover animation */
+}
+
+a:hover {
+    color: #FFD700; /* Gold on hover for appeal */
+    transform: scale(1.1); /* Slight zoom on hover */
 }
 
 .hero {
     position: relative;
     height: 60vh;
     overflow: hidden;
+    background: #333; /* New: Dark fallback bg if video fails, for white text readability */
 }
 
 .hero video {
@@ -54,7 +65,8 @@ a {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: white;
+    color: white; /* White text, now contrasts with dark fallback */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* New: Shadow for better readability on video */
 }
 
 h1 {
@@ -67,6 +79,11 @@ h1 {
     color: white;
     padding: 0.5em 1em;
     border-radius: 5px;
+    transition: background 0.3s ease; /* New: Hover effect */
+}
+
+.cta:hover {
+    background: #0056b3; /* Darker blue on hover */
 }
 
 .services-overview, .about, .services, .portfolio, .contact {
@@ -86,12 +103,19 @@ h1 {
     padding: 1em;
     border-radius: 5px;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* New: Card shadows for appeal */
+    transition: transform 0.3s ease; /* New: Hover lift effect */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Lift on hover */
 }
 
 .card img {
     width: 100%;
     height: 150px;
     object-fit: cover;
+    border-radius: 5px 5px 0 0; /* Rounded top for appeal */
 }
 
 .gallery {
@@ -142,8 +166,5 @@ footer ul {
     }
     .hero-text h1 {
         font-size: 2em;
-    }
-    .logo {
-        height: 40px; /* Smaller on mobile */
     }
 }
