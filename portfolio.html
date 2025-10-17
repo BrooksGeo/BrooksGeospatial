@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Brooks Geospatial</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <!-- Same nav -->
+    </header>
+
+    <section class="portfolio">
+        <h1>Portfolio</h1>
+        <div class="gallery">
+            <div class="item">
+                <img src="assets/images/portfolio1.jpg" alt="Utility Inspection" onclick="openLightbox(this)">
+                <p>Power Grid Inspection - Covered 50 miles efficiently.</p>
+            </div>
+            <div class="item">
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe> <!-- Replace with your embed -->
+                <p>Construction Time-Lapse Video.</p>
+            </div>
+            <!-- Add more items here, e.g., 10-20 total -->
+            <div class="item">
+                <img src="assets/images/portfolio2.jpg" alt="Aerial Photo" onclick="openLightbox(this)">
+                <p>Urban Landscape Photography.</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="">
+    </div>
+
+    <footer>
+        <!-- Same footer -->
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
