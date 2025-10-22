@@ -48,9 +48,18 @@ a:hover {
 
 .hero {
     position: relative;
-    height: 60vh;
+    height: 60vh; /* Adjust height as needed, e.g., 80vh for taller */
     overflow: hidden;
-    background: #333; /* Dark fallback for readability if video fails */
+    background: #333; /* Dark fallback if video loads slow */
+}
+
+.hero iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .hero video {
