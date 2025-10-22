@@ -48,15 +48,12 @@ a:hover {
 
 .hero {
     position: relative;
-    height: 100vh;
+    height: 60vh;
     overflow: hidden;
-    margin-top: 60px; /* Padding from header */
+    margin-top: 60px; /* Padding from fixed header */
 }
 
 .hero video {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -72,11 +69,23 @@ a:hover {
     text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
 }
 
-.vision-mission, .services-overview, .people-matter, .living-place {
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3em;
+}
+
+.cta {
+    background: #007BFF;
+    color: white;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+}
+
+.services-overview {
     max-width: 1200px;
     margin: 2em auto;
     padding: 1em;
-    text-align: center;
+    margin-top: 60px; /* Padding from header if no hero on other pages */
 }
 
 .cards {
@@ -86,15 +95,23 @@ a:hover {
 }
 
 .card {
-    background: white;
+    background: white; /* Restores boxes */
     padding: 1em;
     border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Restores boxes */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Shadow for box effect */
     transition: transform 0.3s;
 }
 
 .card:hover {
     transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px 5px 0 0;
 }
 
 footer {
@@ -107,5 +124,8 @@ footer {
 @media (max-width: 768px) {
     nav ul {
         flex-direction: column;
+    }
+    .hero-text h1 {
+        font-size: 2em;
     }
 }
