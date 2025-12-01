@@ -1,105 +1,196 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
 ---
 
 <Layout title="About | Brooks Geospatial">
-    
-   
-    </nav>
+    <Navbar />
 
-    <section class="relative h-[50vh] flex items-center justify-center overflow-hidden bg-slate-900">
+    <section
+        class="relative h-[50vh] flex items-center justify-center overflow-hidden bg-slate-900"
+    >
         <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 opacity-10" 
-                 style="background-image: linear-gradient(rgba(20, 184, 166, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(20, 184, 166, 0.2) 1px, transparent 1px); background-size: 30px 30px;">
+            <div
+                class="absolute inset-0 opacity-10"
+                style="background-image: linear-gradient(rgba(20, 184, 166, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(20, 184, 166, 0.2) 1px, transparent 1px); background-size: 30px 30px;"
+            >
             </div>
-            <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-transparent to-slate-950"></div>
+            <div
+                class="absolute inset-0 bg-gradient-to-b from-slate-950 via-transparent to-slate-950"
+            >
+            </div>
         </div>
 
         <div class="relative z-10 text-center max-w-4xl px-6 mt-10">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white tracking-tight">
-                About <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-500">Brooks Geospatial</span>
+            <h1
+                class="text-4xl md:text-6xl font-bold mb-6 text-white tracking-tight"
+            >
+                About <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-500"
+                    >Brooks Geospatial</span
+                >
             </h1>
-            <p class="text-xl text-slate-400 max-w-2xl mx-auto font-light leading-relaxed">
-                Combining analytical rigor with community-focused entrepreneurship.
+            <p
+                class="text-xl text-slate-400 max-w-2xl mx-auto font-light leading-relaxed"
+            >
+                Combining analytical rigor with community-focused
+                entrepreneurship.
             </p>
         </div>
     </section>
 
     <section class="py-24 bg-slate-950 relative">
         <div class="max-w-7xl mx-auto px-6">
-            
             <div class="grid md:grid-cols-2 gap-16 items-center mb-24">
-                
                 <div>
-                    <div class="inline-block border border-teal-500/30 bg-teal-500/10 px-3 py-1 rounded-full text-teal-400 text-xs font-bold mb-6 uppercase tracking-wider">
+                    <div
+                        class="inline-block border border-teal-500/30 bg-teal-500/10 px-3 py-1 rounded-full text-teal-400 text-xs font-bold mb-6 uppercase tracking-wider"
+                    >
                         The Founder
                     </div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Davis "Mac" Brooks</h2>
-                    
-                    <div class="space-y-6 text-slate-300 leading-relaxed text-lg">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                        Davis "Mac" Brooks
+                    </h2>
+
+                    <div
+                        class="space-y-6 text-slate-300 leading-relaxed text-lg"
+                    >
                         <p>
-                            Davis “Mac” Brooks is a GIS analyst and FAA Part 107–certified drone pilot combining spatial data analysis, market research, and practical fieldwork to deliver high-quality geospatial products.
+                            Davis “Mac” Brooks is a GIS analyst and FAA Part
+                            107–certified drone pilot combining spatial data
+                            analysis, market research, and practical fieldwork
+                            to deliver high-quality geospatial products.
                         </p>
                         <p>
-                            As a Texas State University graduate with roots in Geography and Soil Science, Mac has produced market feasibility studies across Central Texas. As co-owner of Mac’s Daqs Bar and Lounge and founder of Brooks Geospatial, he blends analytical rigor with community-focused entrepreneurship.
+                            As a Texas State University graduate with roots in
+                            Geography and Soil Science, Mac has produced market
+                            feasibility studies across Central Texas. As
+                            co-owner of Mac’s Daqs Bar and Lounge and founder of
+                            Brooks Geospatial, he blends analytical rigor with
+                            community-focused entrepreneurship.
                         </p>
                     </div>
                 </div>
 
                 <div class="relative group">
-                    <div class="absolute -inset-4 bg-teal-500/20 blur-xl rounded-full opacity-50 group-hover:opacity-75 transition"></div>
-                    <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl aspect-[4/5] max-w-md mx-auto">
-                        <img src="/headshot.jpg" alt="Davis 'Mac' Brooks" class="w-full h-full object-cover" />
+                    <div
+                        class="absolute -inset-4 bg-teal-500/20 blur-xl rounded-full opacity-50 group-hover:opacity-75 transition"
+                    >
+                    </div>
+                    <div
+                        class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl aspect-[4/5] max-w-md mx-auto"
+                    >
+                        <img
+                            src="/headshot.jpg"
+                            alt="Davis 'Mac' Brooks"
+                            class="w-full h-full object-cover"
+                        />
                     </div>
                 </div>
             </div>
 
             <div class="mb-24">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-white">Core Expertise</h2>
-                    <div class="w-16 h-1 bg-teal-500 mx-auto mt-4 rounded-full"></div>
+                    <h2 class="text-3xl font-bold text-white">
+                        Core Expertise
+                    </h2>
+                    <div class="w-16 h-1 bg-teal-500 mx-auto mt-4 rounded-full">
+                    </div>
                 </div>
-                
+
                 <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-slate-900 p-8 rounded-xl border border-slate-800 hover:border-teal-500/50 transition">
-                        <h3 class="text-xl font-bold text-white mb-3">GIS & Mapping</h3>
-                        <p class="text-slate-400">ESRI-trained; ArcGIS/ArcMap, geocoding, map production, and spatial data management.</p>
+                    <div
+                        class="bg-slate-900 p-8 rounded-xl border border-slate-800 hover:border-teal-500/50 transition"
+                    >
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            GIS & Mapping
+                        </h3>
+                        <p class="text-slate-400">
+                            ESRI-trained; ArcGIS/ArcMap, geocoding, map
+                            production, and spatial data management.
+                        </p>
                     </div>
-                    <div class="bg-slate-900 p-8 rounded-xl border border-slate-800 hover:border-teal-500/50 transition">
-                        <h3 class="text-xl font-bold text-white mb-3">Market & Data Analysis</h3>
-                        <p class="text-slate-400">Real estate market studies, demographic research, and economic trend analysis.</p>
+                    <div
+                        class="bg-slate-900 p-8 rounded-xl border border-slate-800 hover:border-teal-500/50 transition"
+                    >
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            Market & Data Analysis
+                        </h3>
+                        <p class="text-slate-400">
+                            Real estate market studies, demographic research,
+                            and economic trend analysis.
+                        </p>
                     </div>
-                    <div class="bg-slate-900 p-8 rounded-xl border border-slate-800 hover:border-teal-500/50 transition">
-                        <h3 class="text-xl font-bold text-white mb-3">UAS Operations</h3>
-                        <p class="text-slate-400">FAA Part 107 certified for aerial mapping, site documentation, and data collection.</p>
+                    <div
+                        class="bg-slate-900 p-8 rounded-xl border border-slate-800 hover:border-teal-500/50 transition"
+                    >
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            UAS Operations
+                        </h3>
+                        <p class="text-slate-400">
+                            FAA Part 107 certified for aerial mapping, site
+                            documentation, and data collection.
+                        </p>
                     </div>
-                    <div class="bg-slate-900 p-8 rounded-xl border border-slate-800 hover:border-teal-500/50 transition">
-                        <h3 class="text-xl font-bold text-white mb-3">Technical Skills</h3>
-                        <p class="text-slate-400">ArcGIS Suite, Python, FileMaker, and Microsoft Office.</p>
+                    <div
+                        class="bg-slate-900 p-8 rounded-xl border border-slate-800 hover:border-teal-500/50 transition"
+                    >
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            Technical Skills
+                        </h3>
+                        <p class="text-slate-400">
+                            ArcGIS Suite, Python, FileMaker, and Microsoft
+                            Office.
+                        </p>
                     </div>
-                    <div class="bg-slate-900 p-8 rounded-xl border border-slate-800 hover:border-teal-500/50 transition md:col-span-2">
-                        <h3 class="text-xl font-bold text-white mb-3">Professional Background</h3>
-                        <p class="text-slate-400">GIS Analyst at Capitol Market Research — specializing in data collection, map creation, and commercial real estate databases.</p>
+                    <div
+                        class="bg-slate-900 p-8 rounded-xl border border-slate-800 hover:border-teal-500/50 transition md:col-span-2"
+                    >
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            Professional Background
+                        </h3>
+                        <p class="text-slate-400">
+                            GIS Analyst at Capitol Market Research —
+                            specializing in data collection, map creation, and
+                            commercial real estate databases.
+                        </p>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-gradient-to-br from-slate-900 to-slate-950 p-10 rounded-2xl border border-teal-500/20 text-center">
-                <h2 class="text-2xl font-bold text-teal-400 mb-6 uppercase tracking-widest">Company Mission</h2>
-                <p class="text-xl text-slate-300 leading-relaxed max-w-4xl mx-auto italic">
-                    "Brooks Geospatial delivers clear, accurate, and actionable spatial intelligence that empowers communities, businesses, and developers to make confident, data-driven decisions. We combine advanced GIS technology, aerial data collection, and market-focused research to translate complex geographic information into insights that support sustainable growth, strategic planning, and real-world impact."
+            <div
+                class="bg-gradient-to-br from-slate-900 to-slate-950 p-10 rounded-2xl border border-teal-500/20 text-center"
+            >
+                <h2
+                    class="text-2xl font-bold text-teal-400 mb-6 uppercase tracking-widest"
+                >
+                    Company Mission
+                </h2>
+                <p
+                    class="text-xl text-slate-300 leading-relaxed max-w-4xl mx-auto italic"
+                >
+                    "Brooks Geospatial delivers clear, accurate, and actionable
+                    spatial intelligence that empowers communities, businesses,
+                    and developers to make confident, data-driven decisions. We
+                    combine advanced GIS technology, aerial data collection, and
+                    market-focused research to translate complex geographic
+                    information into insights that support sustainable growth,
+                    strategic planning, and real-world impact."
                 </p>
             </div>
-
         </div>
     </section>
 
     <footer class="py-12 bg-slate-950 border-t border-slate-800 text-center">
         <div class="flex justify-center mb-4">
-             <img src="/logo2.png" alt="Brooks Geospatial" class="h-8 w-auto opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition duration-500" />
+            <img
+                src="/logo2.png"
+                alt="Brooks Geospatial"
+                class="h-8 w-auto opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition duration-500"
+            />
         </div>
-        <p class="text-slate-600 text-sm">&copy; 2025 Brooks Geospatial. All rights reserved.</p>
+        <p class="text-slate-600 text-sm">
+            &copy; 2025 Brooks Geospatial. All rights reserved.
+        </p>
     </footer>
-
 </Layout>
