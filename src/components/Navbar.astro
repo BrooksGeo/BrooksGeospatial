@@ -1,111 +1,115 @@
 ---
-// No special imports needed
+const currentPath = Astro.url.pathname;
+const links = [
+  { href: "/ai-evaluation", label: "AI Evaluation" },
+  { href: "/gis-data-qa", label: "GIS & Data QA" },
+  { href: "/projects", label: "Projects" },
+  { href: "/about", label: "About" },
+  { href: "/resume", label: "Resume" },
+  { href: "/contact", label: "Contact" },
+];
 ---
 
-<nav
-    class="fixed w-full z-50 top-0 bg-slate-950/90 backdrop-blur-md border-b border-white/10"
->
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="/" class="flex items-center gap-3">
-            <img
-                src="/logo2.png"
-                alt="Brooks Geospatial"
-                class="h-10 md:h-12 w-auto rounded-lg"
-            />
-        </a>
+<header class="sticky top-0 z-50 border-b border-white/10 bg-[#07151f]/95 backdrop-blur">
+  <nav
+    class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6"
+    aria-label="Primary navigation"
+  >
+    <a href="/" class="flex items-center gap-3 rounded-sm" aria-label="Brooks Geospatial home">
+      <img src="/logo2.png" width="1024" height="307" alt="Brooks Geospatial" class="h-8 w-auto sm:h-9" />
+    </a>
 
-        <div
-            class="hidden md:flex space-x-8 text-sm font-medium text-slate-300"
-        >
-            <a href="/" class="hover:text-teal-400 transition">Home</a>
-            <a href="/#services" class="hover:text-teal-400 transition"
-                >Services</a
-            >
-            <a
-                href="/commercial-drone-media"
-                class="hover:text-teal-400 transition">Media</a
-            >
-            <a href="/portfolio" class="hover:text-teal-400 transition"
-                >Portfolio</a
-            >
-            <a href="/about" class="hover:text-teal-400 transition">About</a>
-            <a href="/contact" class="hover:text-teal-400 transition">Contact</a
-            >
-        </div>
-
-        <a
-            href="/contact"
-            class="hidden md:block bg-teal-500 text-white px-6 py-2.5 rounded font-semibold text-sm hover:bg-teal-400 transition shadow-[0_0_20px_rgba(20,184,166,0.3)]"
-        >
-            Get in Touch
-        </a>
-
-        <button
-            id="mobile-menu-btn"
-            class="md:hidden text-white focus:outline-none"
-        >
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-8 w-8"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-        </button>
+    <div class="hidden items-center gap-5 lg:flex">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            aria-current={currentPath === link.href ? "page" : undefined}
+            class:list={[
+              "text-sm font-semibold transition hover:text-[#54d7c5]",
+              currentPath === link.href ? "text-[#54d7c5]" : "text-slate-300",
+            ]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
     </div>
 
-    <div
-        id="mobile-menu"
-        class="hidden md:hidden bg-slate-900 border-b border-white/10"
+    <a
+      href="/contact"
+      data-analytics-event="demo_click"
+      class="hidden rounded-sm bg-[#238e89] px-4 py-2 text-sm font-bold text-white transition hover:bg-[#2ab7a9] lg:inline-flex"
+      >Discuss a pilot</a
     >
-        <div class="flex flex-col px-6 py-4 space-y-4 text-center">
-            <a
-                href="/"
-                class="text-slate-300 hover:text-teal-400 text-lg py-2 border-b border-white/5"
-                >Home</a
-            >
-            <a
-                href="/#services"
-                class="text-slate-300 hover:text-teal-400 text-lg py-2 border-b border-white/5"
-                >Services</a
-            >
-            <a
-                href="/commercial-drone-media"
-                class="text-slate-300 hover:text-teal-400 text-lg py-2 border-b border-white/5"
-                >Media</a
-            >
-            <a
-                href="/portfolio"
-                class="text-slate-300 hover:text-teal-400 text-lg py-2 border-b border-white/5"
-                >Portfolio</a
-            >
-            <a
-                href="/about"
-                class="text-slate-300 hover:text-teal-400 text-lg py-2 border-b border-white/5"
-                >About</a
-            >
-            <a
-                href="/contact"
-                class="text-slate-300 hover:text-teal-400 text-lg py-2"
-                >Contact</a
-            >
-        </div>
+
+    <button
+      id="menu-button"
+      class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-white/15 text-[#f6f2ea] lg:hidden"
+      type="button"
+      aria-label="Open navigation menu"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+    >
+      <svg
+        aria-hidden="true"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"></path></svg
+      >
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="hidden border-t border-white/10 bg-[#0c202d] lg:hidden">
+    <div class="mx-auto grid max-w-7xl gap-1 px-4 py-3 sm:px-6">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            aria-current={currentPath === link.href ? "page" : undefined}
+            class:list={[
+              "rounded-sm px-3 py-3 font-semibold",
+              currentPath === link.href ? "bg-[#153545] text-[#54d7c5]" : "text-slate-100 hover:bg-white/5",
+            ]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a
+        href="/contact"
+        data-analytics-event="demo_click"
+        class="mt-2 rounded-sm bg-[#238e89] px-3 py-3 text-center font-bold text-white"
+        >Discuss an evaluation pilot</a
+      >
     </div>
-</nav>
+  </div>
+</header>
 
 <script>
-    const btn = document.getElementById("mobile-menu-btn");
-    const menu = document.getElementById("mobile-menu");
+  const button = document.querySelector<HTMLButtonElement>("#menu-button");
+  const menu = document.querySelector<HTMLElement>("#mobile-menu");
 
-    if (btn && menu) {
-        btn.addEventListener("click", () => {
-            menu.classList.toggle("hidden");
-        });
-    }
+  function closeMenu() {
+    button?.setAttribute("aria-expanded", "false");
+    button?.setAttribute("aria-label", "Open navigation menu");
+    menu?.classList.add("hidden");
+  }
+
+  button?.addEventListener("click", () => {
+    const isOpen = button.getAttribute("aria-expanded") === "true";
+    button.setAttribute("aria-expanded", String(!isOpen));
+    button.setAttribute("aria-label", isOpen ? "Open navigation menu" : "Close navigation menu");
+    menu?.classList.toggle("hidden", isOpen);
+  });
+
+  menu?.addEventListener("click", (event) => {
+    if ((event.target as Element).closest("a")) closeMenu();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeMenu();
+  });
 </script>

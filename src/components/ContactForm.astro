@@ -1,0 +1,108 @@
+---
+import { site } from "../data/site.mjs";
+const endpoint = `https://formsubmit.co/ajax/${site.contact.email}`;
+const fallback = `https://formsubmit.co/${site.contact.email}`;
+---
+
+<form id="contact-form" action={fallback} method="POST" data-endpoint={endpoint} class="space-y-5" novalidate>
+  <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+  <input type="hidden" name="_captcha" value="false" />
+  <input type="hidden" name="_subject" value="Brooks Geospatial website inquiry" />
+  <div>
+    <label for="name" class="mb-2 block text-sm font-bold text-slate-100"
+      >Name <span aria-hidden="true">*</span></label
+    >
+    <input
+      id="name"
+      name="name"
+      autocomplete="name"
+      required
+      minlength="2"
+      class="w-full border border-[#99b8c8]/35 bg-[#061019] px-4 py-3 text-[#f6f2ea] placeholder:text-slate-500"
+      placeholder="Your name"
+    />
+  </div>
+  <div>
+    <label for="email" class="mb-2 block text-sm font-bold text-slate-100"
+      >Work email <span aria-hidden="true">*</span></label
+    >
+    <input
+      id="email"
+      name="email"
+      type="email"
+      autocomplete="email"
+      required
+      class="w-full border border-[#99b8c8]/35 bg-[#061019] px-4 py-3 text-[#f6f2ea] placeholder:text-slate-500"
+      placeholder="name@organization.com"
+    />
+  </div>
+  <div>
+    <label for="message" class="mb-2 block text-sm font-bold text-slate-100"
+      >What would you like to evaluate? <span aria-hidden="true">*</span></label
+    >
+    <textarea
+      id="message"
+      name="message"
+      rows="6"
+      required
+      minlength="20"
+      class="w-full border border-[#99b8c8]/35 bg-[#061019] px-4 py-3 text-[#f6f2ea] placeholder:text-slate-500"
+      placeholder="Briefly describe the system, workflow, or data quality question."></textarea>
+  </div>
+  <button
+    type="submit"
+    class="inline-flex min-h-12 w-full items-center justify-center bg-[#238e89] px-6 py-3 font-bold text-white transition hover:bg-[#2ab7a9] disabled:cursor-wait disabled:opacity-70"
+    >Send inquiry</button
+  >
+  <p id="form-status" class="min-h-6 text-sm leading-6 text-slate-300" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  import { trackAnalytics } from "../lib/analytics";
+
+  const form = document.querySelector<HTMLFormElement>("#contact-form");
+  const status = document.querySelector<HTMLElement>("#form-status");
+  const submitButton = form?.querySelector<HTMLButtonElement>("button[type='submit']");
+  let started = false;
+
+  form?.addEventListener("focusin", () => {
+    if (!started) {
+      trackAnalytics("contact_form_start");
+      started = true;
+    }
+  });
+
+  form?.addEventListener("submit", async (event) => {
+    if (!form.checkValidity()) {
+      event.preventDefault();
+      status!.textContent =
+        "Please complete the required fields with a valid email and a short project description.";
+      form.reportValidity();
+      return;
+    }
+
+    event.preventDefault();
+    if (!submitButton || !status) return;
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending…";
+    status.textContent = "Sending your inquiry…";
+
+    try {
+      const response = await fetch(form.dataset.endpoint ?? form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+      if (!response.ok) throw new Error("Contact form request failed");
+      form.reset();
+      status.textContent = "Thanks — your inquiry has been sent. Mac will be in touch.";
+      trackAnalytics("contact_form_submission");
+    } catch {
+      status.textContent =
+        "Your message could not be sent right now. Please email mac@brooksgeospatial.com instead.";
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = "Send inquiry";
+    }
+  });
+</script>

@@ -1,0 +1,23 @@
+---
+import { site } from "../data/site.mjs";
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-white/10 bg-[#061019]">
+  <div class="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1fr_auto] md:items-end">
+    <div>
+      <img src="/logo2.png" width="1024" height="307" alt="Brooks Geospatial" class="h-8 w-auto" />
+      <p class="mt-4 max-w-xl text-sm leading-6 text-slate-400">
+        Geospatial AI evaluation and GIS quality assurance for systems that need defensible spatial outputs.
+      </p>
+    </div>
+    <div class="text-sm text-slate-400 md:text-right">
+      <a
+        href={`mailto:${site.contact.email}`}
+        data-analytics-event="email_click"
+        class="font-semibold text-[#8de6da] hover:text-white">{site.contact.email}</a
+      >
+      <p class="mt-3">© {year} Brooks Geospatial. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

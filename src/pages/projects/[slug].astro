@@ -1,0 +1,109 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import StatusBadge from "../../components/StatusBadge.astro";
+import { projects } from "../../data/projects.mjs";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Projects", href: "/projects" },
+  { label: project.title },
+];
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: breadcrumbs.map((crumb, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: crumb.label,
+    ...(crumb.href ? { item: new URL(crumb.href, "https://brooksgeospatial.com").href } : {}),
+  })),
+};
+---
+
+<Layout
+  title={`${project.title} | Brooks Geospatial`}
+  description={project.summary}
+  canonicalPath={`/projects/${project.slug}`}
+  structuredData={structuredData}
+>
+  <Navbar />
+  <main id="main-content">
+    <Breadcrumbs items={breadcrumbs} />
+    <section class="map-grid bg-[#0b2230] px-4 py-16 sm:px-6 sm:py-24">
+      <div class="mx-auto max-w-5xl">
+        <StatusBadge status={project.status} /><p
+          class="mt-7 text-xs font-bold uppercase tracking-[0.2em] text-[#8de6da]"
+        >
+          Evaluation project
+        </p><h1 class="mt-4 text-4xl font-bold tracking-tight text-[#f6f2ea] sm:text-5xl">
+          {project.title}
+        </h1><p class="mt-6 max-w-3xl text-xl leading-8 text-slate-200">{project.summary}</p>
+      </div>
+    </section>
+    <section class="bg-[#f6f2ea] px-4 py-16 text-[#10232d] sm:px-6 sm:py-24">
+      <div class="mx-auto grid max-w-5xl gap-12 lg:grid-cols-[1.2fr_.8fr]">
+        <div>
+          <h2 class="text-3xl font-bold tracking-tight">Current scope</h2><p
+            class="mt-5 text-lg leading-8 text-slate-700"
+          >
+            {project.description}
+          </p><div class="mt-10 border-l-4 border-amber-500 bg-amber-50 p-5">
+            <h3 class="font-bold text-amber-950">In-progress project</h3><p
+              class="mt-2 leading-7 text-amber-950"
+            >
+              This page describes work in development. It does not claim published benchmark results, client
+              work, or product performance.
+            </p>
+          </div>
+        </div><aside class="border border-[#9db5c2] bg-[#edf3f6] p-6">
+          <h2 class="text-xl font-bold">Evaluation focus</h2><ul
+            class="mt-5 space-y-4 text-sm leading-6 text-slate-700"
+          >
+            {
+              project.focus.map((item) => (
+                <li class="flex gap-3">
+                  <span aria-hidden="true" class="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#116f6c]" />
+                  {item}
+                </li>
+              ))
+            }
+          </ul>
+        </aside>
+      </div>
+    </section>
+    <section class="bg-[#0c202d] px-4 py-16 sm:px-6 sm:py-20">
+      <div class="mx-auto max-w-5xl">
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#8de6da]">Planned deliverables</p><h2
+          class="mt-4 text-3xl font-bold tracking-tight text-[#f6f2ea]"
+        >
+          What this work is designed to produce.
+        </h2><ul class="mt-8 grid gap-3 sm:grid-cols-2">
+          {
+            project.deliverables.map((item, index) => (
+              <li class="border border-white/10 bg-[#07151f] p-5">
+                <>
+                  <span class="font-mono text-sm text-[#8de6da]">{String(index + 1).padStart(2, "0")}</span>
+                  <p class="mt-4 font-bold text-[#f6f2ea]">{item}</p>
+                </>
+              </li>
+            ))
+          }
+        </ul><a
+          href="/contact"
+          data-analytics-event="demo_click"
+          class="mt-10 inline-flex min-h-12 items-center justify-center bg-[#238e89] px-6 py-3 font-bold text-white hover:bg-[#2ab7a9]"
+          >Discuss an Evaluation Pilot</a
+        >
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

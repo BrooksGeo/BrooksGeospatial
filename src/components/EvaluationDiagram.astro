@@ -1,0 +1,83 @@
+<figure class="overflow-hidden border border-[#9cb9c8]/30 bg-[#061019] p-4 sm:p-6">
+  <svg
+    viewBox="0 0 720 410"
+    role="img"
+    aria-labelledby="diagram-title diagram-description"
+    class="h-auto w-full"
+  >
+    <title id="diagram-title">Geospatial evaluation compares system output to an expert reference</title>
+    <desc id="diagram-description"
+      >A test task and spatial inputs feed an AI system and an expert reference workflow. A scoring rubric
+      compares their outputs and sends failures to a regression test pack.</desc
+    >
+    <defs
+      ><pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"
+        ><path d="M 28 0 L 0 0 0 28" fill="none" stroke="#416274" stroke-opacity=".45" stroke-width="1"
+        ></path></pattern
+      ></defs
+    >
+    <rect width="720" height="410" fill="url(#grid)"></rect>
+    <g font-family="Inter, sans-serif" fill="#f6f2ea"
+      ><text x="36" y="40" font-size="16" font-weight="700">REALISTIC GIS TASK</text><text
+        x="36"
+        y="65"
+        font-size="13"
+        fill="#b9c8d0">inputs · instructions · constraints</text
+      ></g
+    >
+    <rect x="35" y="88" width="180" height="94" fill="#0b2230" stroke="#54d7c5" stroke-width="2"></rect><text
+      x="56"
+      y="128"
+      fill="#f6f2ea"
+      font-size="16"
+      font-weight="700">Spatial inputs</text
+    ><text x="56" y="153" fill="#b9c8d0" font-size="13">layers · records · CRS</text>
+    <path d="M235 135 H289" stroke="#8de6da" stroke-width="3" marker-end="url(#arrow)"></path>
+    <rect x="310" y="76" width="168" height="74" fill="#153545" stroke="#8de6da" stroke-width="2"></rect><text
+      x="331"
+      y="108"
+      fill="#f6f2ea"
+      font-size="15"
+      font-weight="700">System output</text
+    ><text x="331" y="132" fill="#b9c8d0" font-size="12">agent or product</text>
+    <rect x="310" y="245" width="168" height="74" fill="#153545" stroke="#8de6da" stroke-width="2"
+    ></rect><text x="331" y="277" fill="#f6f2ea" font-size="15" font-weight="700">Reference output</text><text
+      x="331"
+      y="301"
+      fill="#b9c8d0"
+      font-size="12">expert-reviewed</text
+    >
+    <path d="M235 135 H265 V282 H289" stroke="#8de6da" stroke-width="3" fill="none"></path>
+    <path d="M498 113 H536 V194 H570" stroke="#8de6da" stroke-width="3" fill="none"></path><path
+      d="M498 282 H536 V216 H570"
+      stroke="#8de6da"
+      stroke-width="3"
+      fill="none"></path>
+    <rect x="570" y="150" width="118" height="112" fill="#0b2230" stroke="#e8bd70" stroke-width="2"
+    ></rect><text x="590" y="184" fill="#f6f2ea" font-size="15" font-weight="700">Score</text><text
+      x="590"
+      y="207"
+      fill="#b9c8d0"
+      font-size="12">rubric + checks</text
+    ><text x="590" y="230" fill="#e8bd70" font-size="12">failure report</text>
+    <path d="M629 281 V337" stroke="#e8bd70" stroke-width="3"></path><rect
+      x="520"
+      y="338"
+      width="218"
+      height="42"
+      fill="#382c1a"
+      stroke="#e8bd70"
+      stroke-width="2"></rect><text x="542" y="364" fill="#ffe4aa" font-size="13" font-weight="700"
+      >REGRESSION TEST PACK</text
+    >
+    <defs
+      ><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"
+        ><path d="M0,0 L0,6 L7,3 z" fill="#8de6da"></path></marker
+      ></defs
+    >
+  </svg>
+  <figcaption class="mt-4 border-t border-white/10 pt-4 text-sm leading-6 text-slate-300">
+    A reusable evaluation loop: documented inputs, a defensible reference, objective checks, and regression
+    coverage for observed failures.
+  </figcaption>
+</figure>

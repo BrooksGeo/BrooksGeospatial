@@ -1,0 +1,16 @@
+---
+interface Props {
+  status: "in-progress" | "published";
+}
+const { status } = Astro.props;
+const copy = status === "published" ? "Published" : "In progress";
+---
+
+<span
+  class:list={[
+    "inline-flex rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-[0.12em]",
+    status === "published"
+      ? "border-emerald-300/40 bg-emerald-300/10 text-emerald-200"
+      : "border-amber-300/45 bg-amber-200/10 text-amber-100",
+  ]}>{copy}</span
+>
