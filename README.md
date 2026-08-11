@@ -1,43 +1,43 @@
-# Astro Starter Kit: Minimal
+# Brooks Geospatial
+
+Static Astro site for Brooks Geospatial, focused on geospatial AI evaluation and GIS quality assurance.
+
+## Local development
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Quality checks
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```sh
+npm run format:check
+npm run lint
+npm test
+npm run check
+npm run build
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Resume downloads
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+The human-readable resume is available at `/resume`. The PDF and DOCX downloads are generated from the same fact-limited source with:
 
-Any static assets, like images, can be placed in the `public/` directory.
+```sh
+npm run generate:resume
+```
 
-## 🧞 Commands
+The download URLs live in `src/data/site.mjs`.
 
-All commands are run from the root of the project, from a terminal:
+## Content and configuration
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+- `src/data/site.mjs` contains public contact, social, phone-visibility, metadata, and resume-download settings.
+- `src/data/projects.mjs` contains the project cards and static project-detail routes.
+- Projects must remain `in-progress` until public, non-confidential evidence supports a `published` status.
+- Do not put client documents, branded client maps, or private imagery in `public/`. Legacy material is kept in `private/legacy-assets/` and `private/legacy-source/`, neither of which is deployed.
 
-## 👀 Want to learn more?
+## Deployment
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The GitHub Actions workflow deploys the static `dist/` output to GitHub Pages on pushes to `main`. Review this branch, merge it to `main`, and verify the GitHub Pages deployment.
+
+`/portfolio` and `/commercial-drone-media` use static redirect pages because GitHub Pages does not provide repository-level HTTP 301 rules. If the domain is later placed behind a proxy or another host, configure permanent 301 redirects there for those two paths.

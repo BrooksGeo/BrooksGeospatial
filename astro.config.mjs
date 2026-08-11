@@ -1,12 +1,17 @@
-import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
-import react from '@astrojs/react';
+import { defineConfig } from "astro/config";
+import tailwind from "@astrojs/tailwind";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  // Your actual domain name
-  site: 'https://brooksgeospatial.com',
-  
-  // Load the design and 3D engines
-  integrations: [tailwind(), react()],
+  site: "https://brooksgeospatial.com",
+  integrations: [
+    tailwind(),
+    sitemap({
+      filter: (page) => {
+        const pathname = new URL(page).pathname;
+        return !["/portfolio/", "/commercial-drone-media/"].includes(pathname);
+      },
+    }),
+  ],
 });
