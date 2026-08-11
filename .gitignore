@@ -6,6 +6,9 @@ dist/
 # dependencies
 node_modules/
 
+# local archival material; never deploy or commit legacy/client assets
+private/
+
 # logs
 npm-debug.log*
 yarn-debug.log*
