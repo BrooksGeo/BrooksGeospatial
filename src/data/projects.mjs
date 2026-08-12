@@ -8,6 +8,8 @@
  * @property {string[]} deliverables
  * @property {string} description
  * @property {string} [repositoryUrl]
+ * @property {string} [dashboardUrl]
+ * @property {{ src: string, alt: string, width: number, height: number }} [dashboardThumbnail]
  */
 
 /** @type {readonly Project[]} */
@@ -31,6 +33,13 @@ export const projects = Object.freeze([
     ],
     description:
       "This project is being developed as a structured approach to GIS and spatial-data QA. Its scope is focused on the checks that prevent plausible-looking outputs from passing when coordinate systems, geometry, joins, or records are wrong.",
+    dashboardUrl: "https://www.arcgis.com/apps/dashboards/28b04393774f4925b7f613c5cd7c3a70",
+    dashboardThumbnail: {
+      src: "/images/geoqa-spatial-data-evaluation-dashboard.webp",
+      alt: "Brooks GeoQA Spatial Data Evaluation dashboard showing a map with QA findings and a validation-check chart.",
+      width: 960,
+      height: 473,
+    },
   },
   {
     slug: "geoeval-benchmark",

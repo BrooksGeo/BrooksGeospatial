@@ -1,6 +1,7 @@
 export type AnalyticsEvent =
   | "resume_download"
   | "project_repo_click"
+  | "dashboard_click"
   | "demo_click"
   | "contact_form_start"
   | "contact_form_submission"

@@ -10,6 +10,10 @@ test("projects have unique slugs and a transparent publication status", () => {
     assert.match(project.slug, /^[a-z0-9-]+$/);
     assert.ok(project.summary.length > 40);
     assert.ok(["in-progress", "published"].includes(project.status));
+    if (project.dashboardUrl) {
+      assert.match(project.dashboardUrl, /^https:\/\/www\.arcgis\.com\/apps\/dashboards\//);
+      assert.ok(project.dashboardThumbnail, "dashboard links need a corresponding thumbnail");
+    }
   }
 });
 
