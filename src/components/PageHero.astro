@@ -1,18 +1,15 @@
 ---
 interface Props {
-  eyebrow?: string;
+  eyebrow: string;
   title: string;
   description: string;
 }
 const { eyebrow, title, description } = Astro.props;
 ---
 
-<section class="map-grid border-b border-white/10 bg-[#0b2230] px-4 py-20 sm:px-6 sm:py-24">
-  <div class="mx-auto max-w-4xl">
-    {eyebrow && <p class="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[#8de6da]">{eyebrow}</p>}
-    <h1 class="max-w-4xl text-4xl font-bold tracking-tight text-[#f6f2ea] sm:text-5xl md:text-6xl">
-      {title}
-    </h1>
-    <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">{description}</p>
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow"><span class="accent-dot"></span>{eyebrow}</p><h1>{title}</h1><p>{description}</p><slot
+    />
   </div>
 </section>

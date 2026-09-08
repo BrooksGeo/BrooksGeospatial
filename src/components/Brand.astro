@@ -1,0 +1,10 @@
+---
+interface Props {
+  footer?: boolean;
+}
+const { footer = false } = Astro.props;
+---
+
+<a href="/" class:list={["brand", { "brand-footer": footer }]} aria-label="Brooks Geospatial home">
+  <img class="brand-logo" src="/logo2.png" width="1024" height="307" alt="Brooks Geospatial" />
+</a>

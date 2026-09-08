@@ -4,52 +4,42 @@ import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import PageHero from "../components/PageHero.astro";
 import ContactForm from "../components/ContactForm.astro";
+import Icon from "../components/Icon.astro";
 import { site } from "../data/site.mjs";
 ---
 
 <Layout
-  title="Contact | Brooks Geospatial"
-  description="Discuss a geospatial AI evaluation pilot, GIS quality-assurance workflow, or spatial-data validation need."
-  canonicalPath="/contact"
+  title="Start a Project | Contact Brooks Geospatial"
+  description="Talk to Brooks Geospatial about GIS mapping, drone photography, commercial media, or site documentation in Fayette County and Central Texas."
 >
-  <Navbar />
-  <main id="main-content">
+  <Navbar /><main id="main-content">
     <PageHero
-      eyebrow="Contact"
-      title="Discuss an evaluation pilot"
-      description="Share the system, workflow, or spatial-data quality question you need to evaluate."
+      eyebrow="Let’s work together"
+      title="What’s your next perspective?"
+      description="Tell us what you’re working on. Whether you need a map, a fresh set of aerial images, or a clearer view of your site, we’d like to hear about it."
     />
-    <section class="bg-[#f6f2ea] px-4 py-16 text-[#10232d] sm:px-6 sm:py-24">
-      <div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.15fr_.85fr]">
-        <div class="border border-[#9db5c2] bg-white p-6 sm:p-8">
-          <h2 class="text-2xl font-bold">Send an inquiry</h2><p class="mt-3 leading-7 text-slate-700">
-            Describe the system or workflow, the intended users, and the questions an evaluation should
-            answer.
-          </p><div class="mt-8"><ContactForm /></div>
-        </div><aside class="border-t-4 border-[#238e89] bg-[#d8e3eb] p-6 sm:p-8">
-          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#116f6c]">Direct contact</p><h2
-            class="mt-4 text-2xl font-bold"
-          >
-            Email Brooks Geospatial
-          </h2><p class="mt-4 leading-7 text-slate-700">
-            For evaluation pilots, GIS QA work, and professional opportunities:
-          </p><a
-            href={`mailto:${site.contact.email}`}
-            data-analytics-event="email_click"
-            class="mt-5 inline-flex break-all text-lg font-bold text-[#116f6c] underline underline-offset-4 hover:text-[#10232d]"
-            >{site.contact.email}</a
-          ><div class="mt-10 border-t border-[#9db5c2] pt-6">
-            <h3 class="font-bold">What to include</h3><ul
-              class="mt-4 space-y-3 text-sm leading-6 text-slate-700"
+    <div class="container contact-layout">
+      <div class="contact-info">
+        <h2>Start with a conversation.</h2><p>
+          Share a little about your project, its location, and what you’d like to accomplish. Mac will follow
+          up to discuss the scope and next steps.
+        </p><div class="contact-detail">
+          <Icon name="mail" /><div>
+            <span>Email Mac directly</span><a
+              href={`mailto:${site.contact.email}`}
+              data-analytics-event="email_click">{site.contact.email}</a
             >
-              <li>• The GIS, mapping, geocoding, or spatial-data workflow</li><li>
-                • The decision or risk the evaluation needs to address
-              </li><li>• Whether you need benchmark design, QA, reference review, or regression testing</li>
-            </ul>
           </div>
-        </aside>
-      </div>
-    </section>
-  </main>
-  <Footer />
+        </div><div class="contact-detail">
+          <Icon name="pin" /><div>
+            <span>Based in Texas</span><p>Serving Fayette County & Central Texas</p>
+          </div>
+        </div><div class="contact-detail">
+          <Icon name="drone" /><div>
+            <span>Your project, in experienced hands</span><p>GIS analyst & FAA Part 107 drone pilot</p>
+          </div>
+        </div>
+      </div><ContactForm />
+    </div>
+  </main><Footer />
 </Layout>

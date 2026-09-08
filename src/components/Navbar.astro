@@ -1,115 +1,77 @@
 ---
-const currentPath = Astro.url.pathname;
+import Brand from "./Brand.astro";
+import Icon from "./Icon.astro";
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const links = [
-  { href: "/ai-evaluation", label: "AI Evaluation" },
-  { href: "/gis-data-qa", label: "GIS & Data QA" },
-  { href: "/projects", label: "Projects" },
-  { href: "/about", label: "About" },
-  { href: "/resume", label: "Resume" },
-  { href: "/contact", label: "Contact" },
+  {
+    href: "/services",
+    label: "Our services",
+    active: ["/services", "/gis-mapping", "/commercial-drone-media"],
+  },
+  { href: "/portfolio", label: "Our work", active: ["/portfolio"] },
+  { href: "/about", label: "About us", active: ["/about"] },
 ];
 ---
 
-<header class="sticky top-0 z-50 border-b border-white/10 bg-[#07151f]/95 backdrop-blur">
-  <nav
-    class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6"
-    aria-label="Primary navigation"
-  >
-    <a href="/" class="flex items-center gap-3 rounded-sm" aria-label="Brooks Geospatial home">
-      <img src="/logo2.png" width="1024" height="307" alt="Brooks Geospatial" class="h-8 w-auto sm:h-9" />
-    </a>
-
-    <div class="hidden items-center gap-5 lg:flex">
+<header class="site-header">
+  <nav class="container nav-inner" aria-label="Primary navigation">
+    <Brand />
+    <div class="desktop-nav">
       {
         links.map((link) => (
-          <a
-            href={link.href}
-            aria-current={currentPath === link.href ? "page" : undefined}
-            class:list={[
-              "text-sm font-semibold transition hover:text-[#54d7c5]",
-              currentPath === link.href ? "text-[#54d7c5]" : "text-slate-300",
-            ]}
-          >
+          <a href={link.href} aria-current={link.active.includes(path) ? "page" : undefined}>
             {link.label}
           </a>
         ))
       }
     </div>
-
-    <a
-      href="/contact"
-      data-analytics-event="demo_click"
-      class="hidden rounded-sm bg-[#238e89] px-4 py-2 text-sm font-bold text-white transition hover:bg-[#2ab7a9] lg:inline-flex"
-      >Discuss a pilot</a
-    >
-
+    <a class="button button-dark nav-cta" href="/contact">Let’s talk <Icon name="northeast" size={17} /></a>
     <button
       id="menu-button"
-      class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-white/15 text-[#f6f2ea] lg:hidden"
+      class="menu-toggle"
       type="button"
       aria-label="Open navigation menu"
-      aria-controls="mobile-menu"
       aria-expanded="false"
+      aria-controls="mobile-menu"
     >
-      <svg
-        aria-hidden="true"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"></path></svg
-      >
+      <span></span><span></span>
     </button>
   </nav>
-
-  <div id="mobile-menu" class="hidden border-t border-white/10 bg-[#0c202d] lg:hidden">
-    <div class="mx-auto grid max-w-7xl gap-1 px-4 py-3 sm:px-6">
-      {
-        links.map((link) => (
-          <a
-            href={link.href}
-            aria-current={currentPath === link.href ? "page" : undefined}
-            class:list={[
-              "rounded-sm px-3 py-3 font-semibold",
-              currentPath === link.href ? "bg-[#153545] text-[#54d7c5]" : "text-slate-100 hover:bg-white/5",
-            ]}
-          >
-            {link.label}
-          </a>
-        ))
-      }
-      <a
-        href="/contact"
-        data-analytics-event="demo_click"
-        class="mt-2 rounded-sm bg-[#238e89] px-3 py-3 text-center font-bold text-white"
-        >Discuss an evaluation pilot</a
-      >
-    </div>
+  <div id="mobile-menu" class="mobile-menu" hidden>
+    {
+      links.map((link) => (
+        <a href={link.href} aria-current={link.active.includes(path) ? "page" : undefined}>
+          {link.label}
+          <Icon name="northeast" size={18} />
+        </a>
+      ))
+    }
+    <a href="/contact">Let’s talk<Icon name="northeast" size={18} /></a>
   </div>
 </header>
-
 <script>
   const button = document.querySelector<HTMLButtonElement>("#menu-button");
   const menu = document.querySelector<HTMLElement>("#mobile-menu");
-
-  function closeMenu() {
+  function closeMenu(returnFocus = false) {
+    const wasOpen = button?.getAttribute("aria-expanded") === "true";
     button?.setAttribute("aria-expanded", "false");
     button?.setAttribute("aria-label", "Open navigation menu");
-    menu?.classList.add("hidden");
+    if (menu) menu.hidden = true;
+    if (returnFocus && wasOpen) button?.focus();
   }
-
   button?.addEventListener("click", () => {
-    const isOpen = button.getAttribute("aria-expanded") === "true";
-    button.setAttribute("aria-expanded", String(!isOpen));
-    button.setAttribute("aria-label", isOpen ? "Open navigation menu" : "Close navigation menu");
-    menu?.classList.toggle("hidden", isOpen);
+    const open = button.getAttribute("aria-expanded") !== "true";
+    button.setAttribute("aria-expanded", String(open));
+    button.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+    if (menu) menu.hidden = !open;
   });
-
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeMenu(true);
+  });
   menu?.addEventListener("click", (event) => {
     if ((event.target as Element).closest("a")) closeMenu();
   });
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeMenu();
+  window.matchMedia("(min-width: 800px)").addEventListener("change", (event) => {
+    if (event.matches) closeMenu();
   });
 </script>

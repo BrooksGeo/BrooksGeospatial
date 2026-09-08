@@ -1,84 +1,114 @@
 /**
- * @typedef {Object} Project
- * @property {string} slug
- * @property {string} title
- * @property {"in-progress" | "published"} status
- * @property {string} summary
- * @property {string[]} focus
- * @property {string[]} deliverables
- * @property {string} description
- * @property {string} [repositoryUrl]
- * @property {string} [dashboardUrl]
- * @property {{ src: string, alt: string, width: number, height: number }} [dashboardThumbnail]
+ * Selected work restored from the pre-AI Brooks Geospatial site (0a898a5).
+ * See CONTENT-SOURCES.md for image provenance and attribution.
  */
-
-/** @type {readonly Project[]} */
 export const projects = Object.freeze([
   {
-    slug: "spatial-data-qa-toolkit",
-    title: "Spatial Data QA Toolkit",
-    status: "in-progress",
+    slug: "country-club-media",
+    title: "A fresh perspective on the club",
+    category: "Aerial imagery",
+    location: "Fayette County, Texas",
+    image: "country-club-aerial",
+    alt: "Aerial view of a country club golf course, lake, and tree-lined fairways",
     summary:
-      "A reusable quality-assurance toolkit for checking the spatial and tabular conditions that make GIS outputs defensible.",
-    focus: [
-      "CRS, units, extent, and spatial-tolerance checks",
-      "Geometry, topology, schema, null, duplicate, and orphan-record review",
-      "Documented workflow checks that can be rerun as data changes",
-    ],
-    deliverables: [
-      "Documented QA task set",
-      "Expected checks and review criteria",
-      "Python-assisted checks where appropriate",
-      "Workflow and exception documentation",
-    ],
+      "A coordinated collection of aerial imagery, ground photography, and marketing media for a local country club.",
     description:
-      "This project is being developed as a structured approach to GIS and spatial-data QA. Its scope is focused on the checks that prevent plausible-looking outputs from passing when coordinate systems, geometry, joins, or records are wrong.",
-    dashboardUrl: "https://www.arcgis.com/apps/dashboards/28b04393774f4925b7f613c5cd7c3a70",
-    dashboardThumbnail: {
-      src: "/images/geoqa-spatial-data-evaluation-dashboard.webp",
-      alt: "Brooks GeoQA Spatial Data Evaluation dashboard showing a map with QA findings and a validation-check chart.",
-      width: 960,
-      height: 473,
-    },
+      "Wide aerial views show the course in its surroundings, while ground photography brings the spaces and details closer. This country club media package was created for use across the website, social media, member communications, and promotions.",
+    deliverables: ["Aerial photography", "Ground photography", "Marketing media"],
+    gallery: [
+      { image: "country-club-green", alt: "Golf green surrounded by water at the country club" },
+      {
+        image: "country-club-courts",
+        alt: "Country club tennis and pickleball courts photographed from above",
+      },
+      { image: "country-club-ground", alt: "Shaded grounds looking out toward the golf course" },
+      {
+        image: "country-club-interior",
+        alt: "Dining and event details photographed inside the country club",
+      },
+    ],
   },
   {
-    slug: "geoeval-benchmark",
-    title: "GeoEval Benchmark",
-    status: "in-progress",
+    slug: "land-and-property",
+    title: "Land, seen in context",
+    category: "Aerial imagery",
+    location: "Central Texas",
+    image: "rural-property",
+    alt: "Drone view of rural land, mature trees, open spaces, and surrounding properties",
     summary:
-      "A benchmark design for testing whether AI systems can execute realistic GIS tasks with reproducible, reviewable results.",
-    focus: [
-      "Realistic ArcGIS and QGIS task design",
-      "Expert reference outputs and objective scoring rubrics",
-      "Failure reports and regression cases for repeatable evaluation",
-    ],
-    deliverables: [
-      "Task library",
-      "Inputs and reference outputs",
-      "Scoring rubric",
-      "Failure taxonomy and regression pack",
-    ],
+      "Aerial property imagery that puts the landscape, access, and surrounding land into one clear view.",
     description:
-      "GeoEval is an in-progress benchmark concept for evaluating geospatial AI against real GIS work. Public project material will exclude confidential client data, proprietary datasets, and unsupported performance claims.",
+      "Aerial photography helps communicate the character of a property beyond what can be seen from the road. These images show the relationship between open land, tree cover, neighboring properties, and access routes.",
+    deliverables: ["Property photography", "Wide aerial views", "Real estate imagery"],
+    gallery: [
+      { image: "aerial-land", alt: "Aerial view of a rural property with open fields and a pond" },
+      { image: "land-overview", alt: "Property overview with an illustrative boundary overlay" },
+    ],
+    note: "Boundary overlays are illustrative and do not establish legal property boundaries.",
   },
   {
-    slug: "texas-geocoder-evaluation",
-    title: "Texas Geocoder Evaluation",
-    status: "in-progress",
+    slug: "parcel-mapping",
+    title: "Making parcel data readable",
+    category: "GIS & mapping",
+    location: "La Grange, Texas",
+    image: "parcel-map",
+    alt: "Thematic parcel map of La Grange, Texas, with a legend and north arrow",
     summary:
-      "An in-progress evaluation design for reviewing geocoder and location-search outputs against transparent spatial criteria.",
-    focus: [
-      "Address and location-query task design",
-      "Coordinate, match-quality, and spatial-tolerance review",
-      "Documented failures for retesting after system changes",
-    ],
-    deliverables: [
-      "Evaluation task set",
-      "Reference locations and review notes",
-      "Objective scoring criteria",
-      "Failure report and regression cases",
-    ],
+      "A thematic map that turns parcel-level information into an organized view of the local landscape.",
     description:
-      "This project is being developed to show how geocoding and location-search systems can be evaluated beyond whether a returned point merely looks plausible on a map.",
+      "GIS connects individual records to real locations. This La Grange parcel map uses a clear classification scheme, a legend, and geographic context to help readers see patterns across the town.",
+    deliverables: ["Parcel mapping", "Data visualization", "Map production"],
+    gallery: [],
+  },
+  {
+    slug: "market-area-mapping",
+    title: "The geography behind the market",
+    category: "GIS & mapping",
+    location: "Central Texas",
+    image: "opportunity-map",
+    alt: "Market study map showing development opportunities around a station area",
+    summary: "Market-area, demographic, and development maps supporting real estate research.",
+    description:
+      "These maps bring together market boundaries, demographic geography, and development opportunity data. They reflect Mac’s experience translating spatial and market research into maps that communicate the study area and its underlying patterns.",
+    attribution:
+      "GIS work by Davis “Mac” Brooks at Capitol Market Research. Original map attribution is retained.",
+    deliverables: ["Market-area mapping", "Demographic visualization", "Development research maps"],
+    gallery: [
+      { image: "market-area-map", alt: "Market study map with census block group boundaries" },
+      { image: "household-map", alt: "Choropleth map showing projected households by geographic area" },
+    ],
+  },
+  {
+    slug: "property-visualization",
+    title: "A clearer view of the site",
+    category: "Site documentation",
+    location: "Central Texas",
+    image: "property-boundaries",
+    alt: "Aerial property photograph with illustrative parcel outlines",
+    summary:
+      "Site imagery with visual overlays to help explain the land and communicate a property’s layout.",
+    description:
+      "Aerial views provide a useful foundation for conversations about a property. Visual overlays help orient the viewer and place individual areas in the context of the larger site.",
+    deliverables: ["Site imagery", "Illustrative overlays", "Property documentation"],
+    gallery: [
+      {
+        image: "land-overview",
+        alt: "Aerial photograph showing a property within its surrounding landscape",
+      },
+    ],
+    note: "Boundary overlays are illustrative and do not establish legal property boundaries.",
+  },
+  {
+    slug: "utility-documentation",
+    title: "Infrastructure in view",
+    category: "Site documentation",
+    location: "Central Texas",
+    image: "utility-imagery",
+    alt: "Utility poles and equipment photographed by drone in a rural landscape",
+    summary: "Drone imagery for documenting utility infrastructure and its surroundings.",
+    description:
+      "An aerial perspective makes it easier to see infrastructure in relation to the surrounding site. Drone imagery supports visual review and provides a record that teams can reference as work progresses.",
+    deliverables: ["Infrastructure imagery", "Visual documentation", "Site context"],
+    gallery: [],
   },
 ]);

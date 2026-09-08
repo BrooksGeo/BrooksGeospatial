@@ -2,7 +2,7 @@ export const site = Object.freeze({
   name: "Brooks Geospatial",
   url: "https://brooksgeospatial.com",
   description:
-    "Brooks Geospatial designs realistic GIS benchmarks, reference outputs, scoring rubrics, and spatial-data QA workflows for AI agents, maps, geocoders, and geospatial products.",
+    "GIS mapping, aerial imagery, drone media, and spatial analysis for properties, businesses, and communities across Fayette County and Central Texas.",
   contact: Object.freeze({
     email: "mac@brooksgeospatial.com",
     phone: Object.freeze({ public: false, display: "", href: "" }),

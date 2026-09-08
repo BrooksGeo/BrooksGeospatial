@@ -1,0 +1,80 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
+import ProjectCTA from "../components/ProjectCTA.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import Icon from "../components/Icon.astro";
+import { projects } from "../data/projects.mjs";
+---
+
+<Layout
+  title="GIS Mapping & Spatial Analysis | Brooks Geospatial"
+  description="Map production, parcel mapping, geocoding, spatial data management, demographic research, and market-area analysis from Brooks Geospatial."
+>
+  <Navbar /><main id="main-content">
+    <PageHero
+      eyebrow="GIS & mapping"
+      title="Find the story in your spatial data."
+      description="A useful map does more than display locations. It connects the information, reveals patterns, and gives you a clearer basis for your next decision."
+      ><a class="button button-dark" href="/contact?service=GIS%20%26%20mapping"
+        >Discuss a mapping project<Icon name="northeast" size={18} /></a
+      ></PageHero
+    >
+    <section class="section">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Maps with a purpose</p><h2>
+              From individual records<br />to the bigger picture.
+            </h2>
+          </div><p>
+            GIS work grounded in geography, real estate research, and practical experience with spatial data.
+          </p>
+        </div>
+        <div class="service-grid">
+          <div class="service-card">
+            <div class="service-card-top"><Icon name="map" size={33} /><span>01</span></div><h3>
+              Map production
+            </h3><p>
+              Custom maps, thematic cartography, and parcel visualizations that organize location information
+              and communicate it clearly.
+            </p>
+          </div><div class="service-card">
+            <div class="service-card-top"><Icon name="pin" size={33} /><span>02</span></div><h3>
+              Spatial & market analysis
+            </h3><p>
+              Market-area mapping, demographic research, and geographic analysis for understanding properties
+              and the places around them.
+            </p>
+          </div><div class="service-card">
+            <div class="service-card-top"><Icon name="layers" size={33} /><span>03</span></div><h3>
+              Spatial data management
+            </h3><p>
+              Geocoding, data organization, and quality checks that help turn source records into useful,
+              consistent GIS information.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section selected-work">
+      <div class="container">
+        <div class="section-heading">
+          <div><p class="eyebrow">Mapping in practice</p><h2>Information you can see.</h2></div><a
+            class="text-link"
+            href="/portfolio">View all work<Icon name="northeast" size={18} /></a
+          >
+        </div><div class="work-grid portfolio-grid">
+          {
+            projects
+              .filter((p) => p.category === "GIS & mapping")
+              .map((project, index) => <ProjectCard project={project} index={index} />)
+          }
+        </div>
+      </div>
+    </section>
+    <ProjectCTA />
+  </main><Footer />
+</Layout>

@@ -2,148 +2,176 @@
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
-import Breadcrumbs from "../../components/Breadcrumbs.astro";
-import StatusBadge from "../../components/StatusBadge.astro";
+import ProjectCTA from "../../components/ProjectCTA.astro";
+import RedirectPage from "../../components/RedirectPage.astro";
+import Icon from "../../components/Icon.astro";
 import { projects } from "../../data/projects.mjs";
-
 export function getStaticPaths() {
-  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+  return [
+    ...projects.map((project) => ({ params: { slug: project.slug }, props: { project } })),
+    ...["spatial-data-qa-toolkit", "geoeval-benchmark", "texas-geocoder-evaluation"].map((slug) => ({
+      params: { slug },
+      props: { project: null },
+    })),
+  ];
 }
-
 const { project } = Astro.props;
-const breadcrumbs = [
-  { label: "Home", href: "/" },
-  { label: "Projects", href: "/projects" },
-  { label: project.title },
-];
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: breadcrumbs.map((crumb, index) => ({
-    "@type": "ListItem",
-    position: index + 1,
-    name: crumb.label,
-    ...(crumb.href ? { item: new URL(crumb.href, "https://brooksgeospatial.com").href } : {}),
-  })),
-};
+const structuredData = project
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://brooksgeospatial.com/" },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Our work",
+          item: "https://brooksgeospatial.com/portfolio",
+        },
+        { "@type": "ListItem", position: 3, name: project.title },
+      ],
+    }
+  : {};
 ---
 
-<Layout
-  title={`${project.title} | Brooks Geospatial`}
-  description={project.summary}
-  canonicalPath={`/projects/${project.slug}`}
-  image={project.dashboardThumbnail?.src}
-  structuredData={structuredData}
->
-  <Navbar />
-  <main id="main-content">
-    <Breadcrumbs items={breadcrumbs} />
-    <section class="map-grid bg-[#0b2230] px-4 py-16 sm:px-6 sm:py-24">
-      <div class="mx-auto max-w-5xl">
-        <StatusBadge status={project.status} /><p
-          class="mt-7 text-xs font-bold uppercase tracking-[0.2em] text-[#8de6da]"
-        >
-          Evaluation project
-        </p><h1 class="mt-4 text-4xl font-bold tracking-tight text-[#f6f2ea] sm:text-5xl">
-          {project.title}
-        </h1><p class="mt-6 max-w-3xl text-xl leading-8 text-slate-200">{project.summary}</p>
-      </div>
-    </section>
-    <section class="bg-[#f6f2ea] px-4 py-16 text-[#10232d] sm:px-6 sm:py-24">
-      <div class="mx-auto grid max-w-5xl gap-12 lg:grid-cols-[1.2fr_.8fr]">
-        <div>
-          <h2 class="text-3xl font-bold tracking-tight">Current scope</h2><p
-            class="mt-5 text-lg leading-8 text-slate-700"
-          >
-            {project.description}
-          </p>
-          {
-            project.dashboardUrl && project.dashboardThumbnail && (
-              <figure class="mt-10 overflow-hidden border border-[#9db5c2] bg-white">
-                <a
-                  href={project.dashboardUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-analytics-event="dashboard_click"
-                  class="group block"
-                  aria-label={`Open the live ArcGIS Dashboard for ${project.title} (opens in a new tab)`}
+{
+  project ? (
+    <Layout
+      title={`${project.title} | Brooks Geospatial`}
+      description={project.summary}
+      image={`/images/work/${project.image}.webp`}
+      structuredData={structuredData}
+    >
+      <>
+        <Navbar />
+        <main id="main-content">
+          <section class="page-hero">
+            <div class="container">
+              <>
+                <nav class="breadcrumbs" aria-label="Breadcrumb">
+                  <>
+                    <a href="/">Home</a>
+                    <span>/</span>
+                    <a href="/portfolio">Our work</a>
+                    <span>/</span>
+                    <span aria-current="page">Project</span>
+                  </>
+                </nav>
+                <p class="eyebrow">
+                  <span class="accent-dot" />
+                  {project.category} / {project.location}
+                </p>
+                <h1>{project.title}</h1>
+                <p>{project.summary}</p>
+              </>
+            </div>
+          </section>
+          <>
+            <div class="container">
+              <>
+                <figure
+                  class:list={["project-hero-image", { "is-map": project.category === "GIS & mapping" }]}
                 >
                   <img
-                    src={project.dashboardThumbnail.src}
-                    alt={project.dashboardThumbnail.alt}
-                    width={project.dashboardThumbnail.width}
-                    height={project.dashboardThumbnail.height}
-                    loading="eager"
-                    decoding="async"
-                    class="block aspect-[2/1] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                    src={`/images/work/${project.image}.webp`}
+                    alt={project.alt}
+                    width="1800"
+                    height="1200"
+                    fetchpriority="high"
                   />
-                </a>
-                <figcaption class="flex flex-wrap items-center justify-between gap-3 border-t border-[#9db5c2] px-5 py-4">
-                  <span class="text-sm font-semibold text-slate-700">
-                    Brooks GeoQA — Spatial Data Evaluation
-                  </span>
-                  <a
-                    href={project.dashboardUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-analytics-event="dashboard_click"
-                    class="font-bold text-[#116f6c] underline decoration-[#54d7c5] underline-offset-4 hover:text-[#0b2230]"
-                  >
-                    Open live dashboard <span aria-hidden="true">↗</span>
-                  </a>
-                </figcaption>
-              </figure>
-            )
-          }
-          <div class="mt-10 border-l-4 border-amber-500 bg-amber-50 p-5">
-            <h3 class="font-bold text-amber-950">In-progress project</h3><p
-              class="mt-2 leading-7 text-amber-950"
-            >
-              This page describes work in development. It does not claim published benchmark results, client
-              work, or product performance.
-            </p>
-          </div>
-        </div><aside class="border border-[#9db5c2] bg-[#edf3f6] p-6">
-          <h2 class="text-xl font-bold">Evaluation focus</h2><ul
-            class="mt-5 space-y-4 text-sm leading-6 text-slate-700"
-          >
-            {
-              project.focus.map((item) => (
-                <li class="flex gap-3">
-                  <span aria-hidden="true" class="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#116f6c]" />
-                  {item}
-                </li>
-              ))
-            }
-          </ul>
-        </aside>
-      </div>
-    </section>
-    <section class="bg-[#0c202d] px-4 py-16 sm:px-6 sm:py-20">
-      <div class="mx-auto max-w-5xl">
-        <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#8de6da]">Planned deliverables</p><h2
-          class="mt-4 text-3xl font-bold tracking-tight text-[#f6f2ea]"
-        >
-          What this work is designed to produce.
-        </h2><ul class="mt-8 grid gap-3 sm:grid-cols-2">
-          {
-            project.deliverables.map((item, index) => (
-              <li class="border border-white/10 bg-[#07151f] p-5">
-                <>
-                  <span class="font-mono text-sm text-[#8de6da]">{String(index + 1).padStart(2, "0")}</span>
-                  <p class="mt-4 font-bold text-[#f6f2ea]">{item}</p>
-                </>
-              </li>
-            ))
-          }
-        </ul><a
-          href="/contact"
-          data-analytics-event="demo_click"
-          class="mt-10 inline-flex min-h-12 items-center justify-center bg-[#238e89] px-6 py-3 font-bold text-white hover:bg-[#2ab7a9]"
-          >Discuss an Evaluation Pilot</a
-        >
-      </div>
-    </section>
-  </main>
-  <Footer />
-</Layout>
+                </figure>
+                <section class="project-details">
+                  <>
+                    <div>
+                      <>
+                        <p class="eyebrow">The perspective</p>
+                        <h2>About the work.</h2>
+                        <ul class="deliverable-list">
+                          {project.deliverables.map((item) => (
+                            <li>{item}</li>
+                          ))}
+                        </ul>
+                      </>
+                    </div>
+                    <div>
+                      <p>{project.description}</p>
+                      {project.attribution && <p class="attribution">{project.attribution}</p>}
+                      {project.note && <p class="project-note">{project.note}</p>}
+                    </div>
+                  </>
+                </section>
+              </>
+              {project.gallery.length > 0 && (
+                <div class="photo-gallery">
+                  {project.gallery.map((photo) => (
+                    <a
+                      href={`/images/work/${photo.image}.webp`}
+                      class:list={["gallery-item", { "is-map": project.category === "GIS & mapping" }]}
+                      data-gallery
+                      aria-label={`Enlarge: ${photo.alt}`}
+                    >
+                      <img
+                        src={`/images/work/${photo.image}-small.webp`}
+                        alt={photo.alt}
+                        width="800"
+                        height="600"
+                        loading="lazy"
+                      />
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+            <ProjectCTA />
+          </>
+        </main>
+        <Footer />
+      </>
+      <dialog class="lightbox" aria-label="Project image viewer">
+        <>
+          <button type="button" aria-label="Close image">
+            <Icon name="cross" />
+          </button>
+          <img alt="" />
+          <p />
+        </>
+      </dialog>
+    </Layout>
+  ) : (
+    <RedirectPage to="/portfolio" label="Our work" />
+  )
+}
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>(".lightbox");
+  let trigger: HTMLElement | null = null;
+  document.querySelectorAll<HTMLAnchorElement>("[data-gallery]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      if (!dialog) return;
+      event.preventDefault();
+      trigger = link;
+      const image = dialog.querySelector<HTMLImageElement>("img")!;
+      image.src = link.href;
+      image.alt = link.querySelector("img")?.alt ?? "Project image";
+      dialog.querySelector("p")!.textContent = image.alt;
+      dialog.showModal();
+      document.body.style.overflow = "hidden";
+    });
+  });
+  dialog?.querySelector("button")?.addEventListener("click", () => dialog.close());
+  dialog?.addEventListener("click", (event) => {
+    if (event.target === dialog) {
+      const bounds = dialog.getBoundingClientRect();
+      if (
+        event.clientX < bounds.left ||
+        event.clientX > bounds.right ||
+        event.clientY < bounds.top ||
+        event.clientY > bounds.bottom
+      )
+        dialog.close();
+    }
+  });
+  dialog?.addEventListener("close", () => {
+    document.body.style.overflow = "";
+    trigger?.focus();
+  });
+</script>

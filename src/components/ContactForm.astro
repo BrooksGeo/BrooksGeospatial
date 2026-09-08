@@ -1,108 +1,119 @@
 ---
 import { site } from "../data/site.mjs";
+import Icon from "./Icon.astro";
 const endpoint = `https://formsubmit.co/ajax/${site.contact.email}`;
 const fallback = `https://formsubmit.co/${site.contact.email}`;
+const serviceOptions = ["GIS & mapping", "Aerial imagery", "Site documentation", "A little of everything"];
 ---
 
-<form id="contact-form" action={fallback} method="POST" data-endpoint={endpoint} class="space-y-5" novalidate>
-  <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+<form id="contact-form" action={fallback} method="POST" data-endpoint={endpoint} class="contact-form">
+  <input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden aria-hidden="true" />
   <input type="hidden" name="_captcha" value="false" />
-  <input type="hidden" name="_subject" value="Brooks Geospatial website inquiry" />
-  <div>
-    <label for="name" class="mb-2 block text-sm font-bold text-slate-100"
-      >Name <span aria-hidden="true">*</span></label
-    >
-    <input
+  <input type="hidden" name="_subject" value="Brooks Geospatial project inquiry" />
+  <div class="form-row">
+    <label for="name">Your name <span aria-hidden="true">*</span></label><input
       id="name"
       name="name"
       autocomplete="name"
       required
       minlength="2"
-      class="w-full border border-[#99b8c8]/35 bg-[#061019] px-4 py-3 text-[#f6f2ea] placeholder:text-slate-500"
-      placeholder="Your name"
+      maxlength="120"
+      placeholder="First and last name"
     />
   </div>
-  <div>
-    <label for="email" class="mb-2 block text-sm font-bold text-slate-100"
-      >Work email <span aria-hidden="true">*</span></label
-    >
-    <input
+  <div class="form-row">
+    <label for="email">Email address <span aria-hidden="true">*</span></label><input
       id="email"
       name="email"
       type="email"
       autocomplete="email"
       required
-      class="w-full border border-[#99b8c8]/35 bg-[#061019] px-4 py-3 text-[#f6f2ea] placeholder:text-slate-500"
-      placeholder="name@organization.com"
+      maxlength="254"
+      placeholder="you@company.com"
     />
   </div>
-  <div>
-    <label for="message" class="mb-2 block text-sm font-bold text-slate-100"
-      >What would you like to evaluate? <span aria-hidden="true">*</span></label
-    >
-    <textarea
+  <div class="form-row">
+    <label for="service">What can we help with?</label>
+    <select id="service" name="service">
+      <option value="">Choose a service (optional)</option>
+      {serviceOptions.map((service) => <option value={service}>{service}</option>)}
+    </select>
+  </div>
+  <div class="form-row">
+    <label for="message">Tell us about your project <span aria-hidden="true">*</span></label><textarea
       id="message"
       name="message"
-      rows="6"
+      rows="5"
       required
       minlength="20"
-      class="w-full border border-[#99b8c8]/35 bg-[#061019] px-4 py-3 text-[#f6f2ea] placeholder:text-slate-500"
-      placeholder="Briefly describe the system, workflow, or data quality question."></textarea>
+      maxlength="5000"
+      placeholder="Your project, its location, and what you’d like to see."></textarea>
   </div>
-  <button
-    type="submit"
-    class="inline-flex min-h-12 w-full items-center justify-center bg-[#238e89] px-6 py-3 font-bold text-white transition hover:bg-[#2ab7a9] disabled:cursor-wait disabled:opacity-70"
-    >Send inquiry</button
+  <button type="submit" class="button button-dark"
+    ><span>Send project inquiry</span><Icon name="northeast" size={18} /></button
   >
-  <p id="form-status" class="min-h-6 text-sm leading-6 text-slate-300" role="status" aria-live="polite"></p>
+  <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+  <p class="form-footnote">Prefer email? <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></p>
 </form>
 
 <script>
   import { trackAnalytics } from "../lib/analytics";
-
   const form = document.querySelector<HTMLFormElement>("#contact-form");
   const status = document.querySelector<HTMLElement>("#form-status");
   const submitButton = form?.querySelector<HTMLButtonElement>("button[type='submit']");
+  const buttonLabel = submitButton?.querySelector("span");
+  const service = form?.querySelector<HTMLSelectElement>("#service");
+  const requestedService = new URLSearchParams(window.location.search).get("service");
+  if (
+    service &&
+    requestedService &&
+    Array.from(service.options).some((option) => option.value === requestedService)
+  )
+    service.value = requestedService;
   let started = false;
-
   form?.addEventListener("focusin", () => {
     if (!started) {
       trackAnalytics("contact_form_start");
       started = true;
     }
   });
-
+  // Keep native validation as the no-JavaScript fallback.
+  if (form) form.noValidate = true;
   form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
     if (!form.checkValidity()) {
-      event.preventDefault();
-      status!.textContent =
-        "Please complete the required fields with a valid email and a short project description.";
+      if (status)
+        status.textContent =
+          "Please add your name, a valid email, and at least 20 characters about your project.";
       form.reportValidity();
       return;
     }
-
-    event.preventDefault();
-    if (!submitButton || !status) return;
+    if (!submitButton || !status || !buttonLabel || submitButton.disabled) return;
     submitButton.disabled = true;
-    submitButton.textContent = "Sending…";
+    buttonLabel.textContent = "Sending…";
     status.textContent = "Sending your inquiry…";
-
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 15000);
     try {
       const response = await fetch(form.dataset.endpoint ?? form.action, {
         method: "POST",
         body: new FormData(form),
         headers: { Accept: "application/json" },
+        signal: controller.signal,
       });
-      if (!response.ok) throw new Error("Contact form request failed");
+      const result = await response.json();
+      if (!response.ok || (result.success !== true && result.success !== "true"))
+        throw new Error("Contact request not accepted");
       form.reset();
       status.textContent = "Thanks — your inquiry has been sent. Mac will be in touch.";
       trackAnalytics("contact_form_submission");
     } catch {
       status.textContent =
-        "Your message could not be sent right now. Please email mac@brooksgeospatial.com instead.";
+        "Your message could not be sent right now. Please email mac@brooksgeospatial.com instead. Your details are still here.";
     } finally {
+      window.clearTimeout(timeout);
       submitButton.disabled = false;
-      submitButton.textContent = "Send inquiry";
+      buttonLabel.textContent = "Send project inquiry";
     }
   });
 </script>

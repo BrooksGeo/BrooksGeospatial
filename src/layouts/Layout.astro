@@ -1,5 +1,7 @@
 ---
 import { site } from "../data/site.mjs";
+import "@fontsource-variable/manrope";
+import "../styles/global.css";
 
 interface Props {
   title: string;
@@ -15,7 +17,7 @@ const {
   title,
   description,
   canonicalPath,
-  image = "/og-default.svg",
+  image = "/og-default.png",
   structuredData = [],
   redirectTo,
   noindex = false,
@@ -56,7 +58,7 @@ const baseStructuredData = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="robots" content={noindex ? "noindex,follow" : "index,follow"} />
-    <meta name="theme-color" content="#07151f" />
+    <meta name="theme-color" content="#f7f7f2" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -78,7 +80,7 @@ const baseStructuredData = [
       ))
     }
   </head>
-  <body class="bg-[#07151f] text-[#f6f2ea] antialiased">
+  <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <slot />
     <script>
@@ -95,9 +97,9 @@ const baseStructuredData = [
 
 <style is:global>
   :root {
-    color-scheme: dark;
+    color-scheme: light;
     font-family:
-      Inter,
+      "Manrope Variable",
       ui-sans-serif,
       system-ui,
       -apple-system,
@@ -116,10 +118,10 @@ const baseStructuredData = [
   h2,
   h3,
   h4 {
-    font-family: "Arial Narrow", "Aptos Display", Inter, sans-serif;
+    font-family: "Manrope Variable", sans-serif;
   }
   :focus-visible {
-    outline: 3px solid #54d7c5;
+    outline: 3px solid #00b3bd;
     outline-offset: 3px;
   }
   .skip-link {
@@ -138,8 +140,8 @@ const baseStructuredData = [
   }
   .map-grid {
     background-image:
-      linear-gradient(rgba(84, 215, 197, 0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(84, 215, 197, 0.08) 1px, transparent 1px);
+      linear-gradient(rgba(0, 179, 189, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 179, 189, 0.08) 1px, transparent 1px);
     background-size: 2rem 2rem;
   }
   @media (prefers-reduced-motion: reduce) {

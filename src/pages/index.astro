@@ -2,252 +2,189 @@
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
+import Icon from "../components/Icon.astro";
+import DataGlobe from "../components/DataGlobe.astro";
 import ProjectCard from "../components/ProjectCard.astro";
-import EvaluationDiagram from "../components/EvaluationDiagram.astro";
+import ProjectCTA from "../components/ProjectCTA.astro";
 import { projects } from "../data/projects.mjs";
 import { site } from "../data/site.mjs";
-
-const evaluationAreas = [
-  ["GIS agents and copilots", "Multi-step GIS tasks, tool use, spatial analysis, and instruction following."],
-  [
-    "Maps, geocoders, and location search",
-    "Location results that need coordinate, match-quality, and spatial-tolerance review.",
-  ],
-  [
-    "Spatial-data pipelines",
-    "Schema, joins, record counts, geometry, lineage, and repeatability across transformations.",
-  ],
-  [
-    "Remote-sensing and visual outputs",
-    "Map and image outputs that must be analytically useful, clearly communicated, and traceable.",
-  ],
-];
-const method = [
-  "Define the task",
-  "Assemble the data",
-  "Build the reference output",
-  "Run the system",
-  "Score the result",
-  "Document failures and regression tests",
-];
-const dimensions = [
-  "Analytical correctness",
-  "CRS and units",
-  "Geometry and topology",
-  "Schema",
-  "Record counts and joins",
-  "Spatial tolerance",
-  "Cartographic quality",
-  "Provenance",
-  "Instruction following",
-  "Uncertainty and refusal",
-  "Reproducibility",
+const services = [
+  {
+    number: "01",
+    icon: "map",
+    title: "GIS & mapping",
+    description:
+      "Turn location data into clear maps and practical insights. From parcel mapping to market-area analysis.",
+    href: "/gis-mapping",
+    tags: "SPATIAL ANALYSIS / CARTOGRAPHY",
+  },
+  {
+    number: "02",
+    icon: "drone",
+    title: "Aerial imagery",
+    description: "Show the full picture with professional drone photography, video, and commercial media.",
+    href: "/commercial-drone-media",
+    tags: "DRONE PHOTOGRAPHY / VIDEO",
+  },
+  {
+    number: "03",
+    icon: "layers",
+    title: "Site documentation",
+    description:
+      "See your site from above. Document properties, infrastructure, and construction as they evolve.",
+    href: "/services#site-documentation",
+    tags: "PROPERTY / INFRASTRUCTURE",
+  },
 ];
 ---
 
-<Layout
-  title="Geospatial AI Evaluation & GIS QA | Brooks Geospatial"
-  description={site.description}
-  canonicalPath="/"
->
+<Layout title="Brooks Geospatial | GIS, Aerial Imagery & Spatial Insight" description={site.description}>
   <Navbar />
   <main id="main-content">
-    <section
-      class="map-grid relative overflow-hidden border-b border-white/10 bg-[#07151f] px-4 py-20 sm:px-6 sm:py-28 lg:py-32"
-    >
-      <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
-        <div>
-          <p class="mb-6 text-xs font-bold uppercase tracking-[0.23em] text-[#8de6da]">Brooks Geospatial</p>
-          <h1
-            class="max-w-3xl text-4xl font-bold leading-[1.04] tracking-tight text-[#f6f2ea] sm:text-5xl lg:text-6xl"
-          >
-            Geospatial AI Evaluation &amp; GIS Quality Assurance
-          </h1>
-          <p class="mt-6 max-w-2xl text-xl leading-8 text-slate-100">
-            Testing whether AI can perform real GIS work — accurately, reproducibly, and with defensible
-            outputs.
+    <section class="home-hero">
+      <div class="container hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="accent-dot"></span>A different perspective</p>
+          <h1>See the<br />bigger <span class="serif-word">picture.</span></h1>
+          <p class="hero-description">
+            On the ground. From the air. In the data.<br />We bring your world into focus with GIS mapping,
+            aerial imagery, and spatial insight.
           </p>
-          <p class="mt-5 max-w-2xl leading-7 text-slate-300">
-            I build realistic ArcGIS and QGIS test cases, expert reference outputs, objective scoring rubrics,
-            and failure reports for GIS agents, mapping tools, geocoders, spatial-data pipelines, and
-            remote-sensing systems.
-          </p>
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <a
-              href="/projects"
-              class="inline-flex min-h-12 items-center justify-center bg-[#238e89] px-6 py-3 font-bold text-white transition hover:bg-[#2ab7a9]"
-              >View Evaluation Projects</a
-            >
-            <a
-              href={site.resume.pdf}
-              data-analytics-event="resume_download"
-              download
-              class="inline-flex min-h-12 items-center justify-center border border-[#8de6da]/70 px-6 py-3 font-bold text-[#f6f2ea] transition hover:border-white hover:bg-white/10"
-              >Download Resume</a
-            >
-            <a
-              href="/contact"
-              data-analytics-event="demo_click"
-              class="inline-flex min-h-12 items-center justify-center px-3 py-3 font-bold text-[#8de6da] underline decoration-[#8de6da] underline-offset-4 hover:text-white"
-              >Discuss an Evaluation Pilot</a
+          <div class="hero-actions">
+            <a class="button button-dark" href="/services"
+              >Explore our services <Icon name="northeast" size={18} /></a
+            ><a class="text-link" href="/portfolio">View our work <Icon name="arrow" size={18} /></a>
+          </div>
+          <div class="hero-footnote">
+            <span class="small-cross">✳</span><span
+              >Rooted in Texas.<br /><strong>Built around your perspective.</strong></span
             >
           </div>
         </div>
-        <EvaluationDiagram />
+        <DataGlobe />
+      </div>
+      <div class="container hero-baseline">
+        <span>GIS. IMAGERY. INSIGHT.</span><a href="#services">Discover what’s possible <span>↓</span></a
+        ><span>EST. IN TEXAS <span class="small-cross">✳</span></span>
       </div>
     </section>
-
-    <section
-      aria-label="Professional proof points"
-      class="border-b border-white/10 bg-[#0c202d] px-4 py-7 sm:px-6"
-    >
-      <div
-        class="mx-auto grid max-w-7xl gap-x-8 gap-y-4 text-sm font-semibold text-slate-200 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6"
-      >
-        <p>3+ years professional GIS experience</p><p>ArcGIS / ArcMap</p><p>QGIS portfolio development</p><p>
-          Python and spatial-data QA
-        </p><p>1,500+ record database experience</p><p>FAA Part 107</p>
-      </div>
-    </section>
-
-    <section class="bg-[#f6f2ea] px-4 py-16 text-[#10232d] sm:px-6 sm:py-24">
-      <div class="mx-auto max-w-7xl">
-        <div class="max-w-3xl">
-          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#116f6c]">What I evaluate</p><h2
-            class="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
-          >
-            Spatial systems need evidence, not just plausible output.
-          </h2><p class="mt-5 text-lg leading-8 text-slate-700">
-            Evaluation is designed around real GIS work, clear inputs, defensible references, and criteria
-            people can inspect.
-          </p>
-        </div>
-        <div class="mt-10 grid gap-px overflow-hidden border border-[#b8c9d2] bg-[#b8c9d2] md:grid-cols-2">
-          {
-            evaluationAreas.map(([title, body], index) => (
-              <article class="bg-[#f6f2ea] p-6 sm:p-8">
-                <>
-                  <span class="font-mono text-sm text-[#116f6c]">0{index + 1}</span>
-                  <h3 class="mt-4 text-2xl font-bold">{title}</h3>
-                  <p class="mt-3 leading-7 text-slate-700">{body}</p>
-                </>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-[#0b2230] px-4 py-16 sm:px-6 sm:py-24">
-      <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[.65fr_1.35fr]">
-        <div>
-          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#8de6da]">Method</p><h2
-            class="mt-4 text-3xl font-bold tracking-tight text-[#f6f2ea] sm:text-4xl"
-          >
-            A six-step evaluation method
-          </h2><p class="mt-5 leading-7 text-slate-300">
-            Each phase preserves the evidence needed to tell whether a system’s output is useful, correct, and
-            repeatable.
-          </p>
-        </div>
-        <ol class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {
-            method.map((step, index) => (
-              <li class="border border-[#99b8c8]/30 bg-[#07151f] p-5">
-                <>
-                  <span class="font-mono text-sm font-bold text-[#8de6da]">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 class="mt-6 text-lg font-bold text-[#f6f2ea]">{step}</h3>
-                </>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
-
-    <section class="bg-[#d8e3eb] px-4 py-16 text-[#10232d] sm:px-6 sm:py-24">
-      <div class="mx-auto max-w-7xl">
-        <div class="max-w-3xl">
-          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#116f6c]">Evaluation dimensions</p><h2
-            class="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
-          >
-            Measure the spatial details that matter.
-          </h2>
-        </div><ul class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {
-            dimensions.map((item) => (
-              <li class="border border-[#9db5c2] bg-[#edf3f6] px-4 py-4 font-semibold">{item}</li>
-            ))
-          }
-        </ul>
-      </div>
-    </section>
-
-    <section class="bg-[#07151f] px-4 py-16 sm:px-6 sm:py-24">
-      <div class="mx-auto max-w-7xl">
-        <div class="flex flex-wrap items-end justify-between gap-5">
-          <div class="max-w-2xl">
-            <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#8de6da]">Featured projects</p><h2
-              class="mt-4 text-3xl font-bold tracking-tight text-[#f6f2ea] sm:text-4xl"
-            >
-              Evaluation work in development
-            </h2><p class="mt-4 leading-7 text-slate-300">
-              Each project page identifies its current status and avoids client data or unsupported results.
-            </p>
-          </div><a href="/projects" class="font-bold text-[#8de6da] hover:text-white"
-            >All projects <span aria-hidden="true">→</span></a
-          >
-        </div><div class="mt-10 grid gap-5 lg:grid-cols-3">
-          {projects.map((project) => <ProjectCard project={project} />)}
-        </div>
-      </div>
-    </section>
-
-    <section class="border-y border-white/10 bg-[#0c202d] px-4 py-16 sm:px-6 sm:py-24">
-      <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_1fr]">
-        <div>
-          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#8de6da]">
-            Professional background
-          </p><h2 class="mt-4 text-3xl font-bold tracking-tight text-[#f6f2ea] sm:text-4xl">
-            GIS analysis grounded in real spatial work.
-          </h2>
-        </div><div class="space-y-5 text-lg leading-8 text-slate-200">
-          <p>
-            Davis “Mac” Brooks progressed from GIS Analyst Intern to GIS Analyst at Capitol Market Research,
-            where he performed market-area mapping and real-estate feasibility research.
-          </p><p>
-            His work included maintaining a database of more than 1,500 office, retail, and multifamily
-            locations, with experience across ArcGIS/ArcMap, QGIS portfolio development, Python, and
-            spatial-data QA.
-          </p><a
-            href="/about"
-            class="inline-flex font-bold text-[#8de6da] underline decoration-[#8de6da] underline-offset-4 hover:text-white"
-            >Read the professional background</a
-          >
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-[#238e89] px-4 py-16 sm:px-6 sm:py-20">
-      <div class="mx-auto flex max-w-7xl flex-col justify-between gap-7 md:flex-row md:items-end">
-        <div>
-          <p class="text-xs font-bold uppercase tracking-[0.2em] text-teal-950">Contact</p><h2
-            class="mt-3 max-w-3xl text-3xl font-bold tracking-tight text-white sm:text-4xl"
-          >
-            Need an evaluation plan for a geospatial system?
-          </h2><p class="mt-4 max-w-2xl text-lg leading-8 text-teal-950">
-            Discuss a focused evaluation pilot, a GIS QA workflow, or a reference-output review.
-          </p>
-        </div><a
-          href="/contact"
-          data-analytics-event="demo_click"
-          class="inline-flex min-h-12 items-center justify-center bg-[#f6f2ea] px-6 py-3 font-bold text-[#10232d] hover:bg-white"
-          >Discuss an Evaluation Pilot</a
+    <section class="credentials-strip" aria-label="Capabilities">
+      <div class="container credentials-inner">
+        <span><Icon name="drone" size={21} />FAA Part 107 certified</span><span
+          ><Icon name="map" size={21} />GIS & spatial analysis</span
+        ><span><Icon name="pin" size={21} />Fayette County & Central Texas</span><span
+          ><Icon name="layers" size={21} />From capture to clarity</span
         >
       </div>
     </section>
+    <section class="section services-section" id="services">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow"><span class="section-number">01 /</span> What we do</p><h2>
+              A wider view.<br />A sharper understanding.
+            </h2>
+          </div><p>
+            Good decisions start with a clear picture.<br />We connect the landscape, the imagery, and the
+            data to help you see what matters.
+          </p>
+        </div>
+        <div class="service-grid">
+          {
+            services.map((service) => (
+              <a href={service.href} class="service-card">
+                <>
+                  <div class="service-card-top">
+                    <>
+                      <Icon name={service.icon} size={34} />
+                      <span>{service.number}</span>
+                    </>
+                  </div>
+                  <h3>{service.title}</h3>
+                  <p>{service.description}</p>
+                  <div class="service-card-bottom">
+                    <>
+                      <span>{service.tags}</span>
+                      <Icon name="northeast" size={21} />
+                    </>
+                  </div>
+                </>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+    <section class="section selected-work" id="work">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow"><span class="section-number">02 /</span> Selected work</p><h2>
+              Real places.<br />Fresh perspectives.
+            </h2>
+          </div><a class="text-link" href="/portfolio"
+            >Explore the portfolio <Icon name="northeast" size={18} /></a
+          >
+        </div>
+        <div class="work-grid">
+          {projects.slice(0, 3).map((project, index) => <ProjectCard project={project} index={index} />)}
+        </div>
+      </div>
+    </section>
+    <section class="about-preview section">
+      <div class="container about-preview-grid">
+        <div class="about-landscape">
+          <img
+            src="/images/work/aerial-land.webp"
+            alt="Aerial view of the Central Texas landscape, fields, trees, and a pond"
+            width="1800"
+            height="1200"
+            loading="lazy"
+          /><span class="photo-note"><span class="accent-dot"></span>A perspective close to home.</span>
+        </div>
+        <div class="about-preview-copy">
+          <p class="eyebrow"><span class="section-number">03 /</span> The people behind the perspective</p><h2
+          >
+            Local roots.<br />A geospatial mindset.
+          </h2><p>
+            Brooks Geospatial is led by Davis “Mac” Brooks, a GIS analyst and FAA Part 107–certified drone
+            pilot with a background in geography, market research, and hands-on fieldwork.
+          </p><p>
+            From Fayette County to projects across Central Texas, we pair local understanding with the tools
+            to see a place differently.
+          </p><a class="text-link" href="/about"
+            >Meet Mac & Brooks Geospatial <Icon name="northeast" size={18} /></a
+          >
+        </div>
+      </div>
+    </section>
+    <section class="process-section section">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow"><span class="section-number">04 /</span> How we work</p><h2>
+              From your question<br />to a clearer answer.
+            </h2>
+          </div><p>A straightforward process.<br />Work shaped around what you need to see.</p>
+        </div>
+        <div class="process-grid">
+          <div>
+            <span>01</span><h3>Start with the purpose.</h3><p>
+              We talk through your site, goals, and how you’ll use the finished maps or imagery.
+            </p>
+          </div><div>
+            <span>02</span><h3>Capture & connect.</h3><p>
+              We bring together the right imagery, location data, and analysis for your project.
+            </p>
+          </div><div>
+            <span>03</span><h3>Make it useful.</h3><p>
+              You get clear, practical deliverables ready to inform decisions or tell your story.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <ProjectCTA />
   </main>
   <Footer />
 </Layout>

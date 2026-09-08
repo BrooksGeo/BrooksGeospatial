@@ -3,78 +3,76 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import PageHero from "../components/PageHero.astro";
+import ProjectCTA from "../components/ProjectCTA.astro";
 ---
 
 <Layout
-  title="About Davis “Mac” Brooks | Brooks Geospatial"
-  description="Davis “Mac” Brooks is a GIS analyst, founder of Brooks Geospatial, and FAA Part 107 remote pilot."
-  canonicalPath="/about"
+  title="About Brooks Geospatial | Davis “Mac” Brooks"
+  description="Meet Davis “Mac” Brooks, founder of Brooks Geospatial, GIS analyst, Texas State geography graduate, and FAA Part 107–certified drone pilot."
 >
-  <Navbar />
-  <main id="main-content">
+  <Navbar /><main id="main-content">
     <PageHero
-      eyebrow="About"
-      title="Davis “Mac” Brooks"
-      description="GIS analyst, founder of Brooks Geospatial, and FAA Part 107 remote pilot."
+      eyebrow="About Brooks Geospatial"
+      title="Local knowledge. A wider view."
+      description="A Texas geospatial business connecting analytical experience, aerial imagery, and practical fieldwork."
     />
-    <section class="bg-[#f6f2ea] px-4 py-16 text-[#10232d] sm:px-6 sm:py-24">
-      <div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[.72fr_1.28fr] lg:items-start">
-        <img
-          src="/headshot.jpg"
-          width="400"
-          height="400"
-          alt="Davis “Mac” Brooks"
-          class="w-full max-w-sm border border-[#9db5c2]"
-          loading="eager"
-        /><div>
-          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#116f6c]">
-            Professional background
-          </p><h2 class="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-            A GIS career focused on practical spatial work.
-          </h2><div class="mt-7 space-y-5 text-lg leading-8 text-slate-700">
-            <p>
-              Davis “Mac” Brooks is a GIS analyst, founder of Brooks Geospatial, and FAA Part 107 remote
-              pilot.
-            </p><p>
-              He progressed from GIS Analyst Intern to GIS Analyst at Capitol Market Research, where he
-              performed market-area mapping and real-estate feasibility research. He maintained a database of
-              more than 1,500 office, retail, and multifamily locations.
-            </p><p>
-              Mac earned a B.S. in Geography, Resource and Environmental Studies, with a minor in Plant and
-              Soil Science from Texas State University.
-            </p>
-          </div>
+    <section class="section">
+      <div class="container about-founder">
+        <div>
+          <p class="eyebrow"><span class="accent-dot"></span>Meet the founder</p><h2>Davis “Mac” Brooks</h2><p
+          >
+            Mac is a GIS analyst and FAA Part 107–certified drone pilot who brings together spatial data
+            analysis, market research, and hands-on fieldwork.
+          </p><p>
+            A Texas State University graduate, he earned a B.S. in Geography, Resource and Environmental
+            Studies, with a minor in Plant and Soil Science. His professional background includes market-area
+            mapping, real estate feasibility research, and spatial data management at Capitol Market Research.
+          </p><p>
+            He founded Brooks Geospatial to make geographic information useful to the businesses, landowners,
+            developers, and communities around him. From a map that explains a market to an aerial image that
+            tells a property’s story, the purpose is the same: a clearer perspective.
+          </p><ul class="deliverable-list">
+            <li>GIS analyst</li><li>FAA Part 107 remote pilot</li><li>Texas State University</li>
+          </ul>
+        </div><figure>
+          <img
+            class="founder-photo"
+            src="/images/mac-brooks.webp"
+            alt="Davis Mac Brooks, founder of Brooks Geospatial"
+            width="900"
+            height="1000"
+          /><figcaption class="founder-caption">DAVIS “MAC” BROOKS / FOUNDER</figcaption>
+        </figure>
+      </div>
+    </section>
+    <section class="expertise-strip">
+      <div class="container expertise-grid">
+        <div>
+          <p class="eyebrow">01 / Spatial understanding</p><h3>GIS & cartography</h3><p>
+            ArcGIS and ArcMap experience spanning geocoding, map production, and spatial data management.
+          </p>
+        </div><div>
+          <p class="eyebrow">02 / On-site perspective</p><h3>Aerial operations</h3><p>
+            Drone imagery, site documentation, and aerial data collection with an FAA Part 107–certified
+            pilot.
+          </p>
+        </div><div>
+          <p class="eyebrow">03 / Research with context</p><h3>Market & data analysis</h3><p>
+            Real estate market studies, demographic research, and geographic analysis informed by Central
+            Texas experience.
+          </p>
         </div>
       </div>
     </section>
-    <section class="bg-[#0c202d] px-4 py-16 sm:px-6 sm:py-24">
-      <div class="mx-auto max-w-6xl">
-        <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#8de6da]">Current focus</p><h2
-          class="mt-4 max-w-3xl text-3xl font-bold tracking-tight text-[#f6f2ea] sm:text-4xl"
-        >
-          Geospatial AI evaluation and GIS quality assurance.
-        </h2><div class="mt-10 grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-3">
-          <article class="bg-[#0c202d] p-6">
-            <h3 class="text-xl font-bold text-[#f6f2ea]">GIS analysis</h3><p
-              class="mt-3 leading-7 text-slate-300"
-            >
-              ArcGIS/ArcMap experience, QGIS portfolio development, market-area mapping, and spatial data
-              work.
-            </p>
-          </article><article class="bg-[#0c202d] p-6">
-            <h3 class="text-xl font-bold text-[#f6f2ea]">Data QA</h3><p class="mt-3 leading-7 text-slate-300">
-              Python-assisted spatial-data QA and the review of records, joins, geometry, and map outputs.
-            </p>
-          </article><article class="bg-[#0c202d] p-6">
-            <h3 class="text-xl font-bold text-[#f6f2ea]">Remote operations</h3><p
-              class="mt-3 leading-7 text-slate-300"
-            >
-              FAA Part 107 remote-pilot certification alongside geospatial analysis experience.
-            </p>
-          </article>
+    <section class="section">
+      <div class="container">
+        <div class="mission">
+          <p class="eyebrow"><span class="accent-dot"></span>Why we do this</p><h2>
+            To turn complex geographic information into clear, useful insight for the people shaping our
+            communities.
+          </h2>
         </div>
       </div>
-    </section>
-  </main>
-  <Footer />
+    </section><ProjectCTA />
+  </main><Footer />
 </Layout>

@@ -1,20 +1,61 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import ProjectCTA from "../components/ProjectCTA.astro";
+import { projects } from "../data/projects.mjs";
+const categories = ["All work", "GIS & mapping", "Aerial imagery", "Site documentation"];
 ---
 
 <Layout
-  title="Projects have moved | Brooks Geospatial"
-  description="Brooks Geospatial evaluation projects are now available at /projects."
-  redirectTo="/projects"
-  noindex
+  title="Our Work | GIS & Drone Portfolio | Brooks Geospatial"
+  description="Explore Brooks Geospatial’s aerial photography, property imagery, parcel maps, market research maps, and site documentation."
 >
-  <main id="main-content" class="flex min-h-screen items-center justify-center bg-[#07151f] px-6 text-center">
-    <div>
-      <h1 class="text-3xl font-bold text-[#f6f2ea]">Projects have moved.</h1><p class="mt-4 text-slate-300">
-        Continue to the new Brooks Geospatial projects page.
-      </p><a href="/projects" class="mt-7 inline-flex bg-[#238e89] px-5 py-3 font-bold text-white"
-        >View projects</a
-      >
-    </div>
-  </main>
+  <Navbar /><main id="main-content">
+    <PageHero
+      eyebrow="Our work"
+      title="Real places. Fresh perspectives."
+      description="A selection of maps, aerial imagery, and site documentation. Different projects, connected by a clearer way of seeing."
+    />
+    <section class="gallery-section">
+      <div class="container">
+        <div class="filter-bar" role="group" aria-label="Filter portfolio by service">
+          {
+            categories.map((category, index) => (
+              <button type="button" data-filter={category} aria-pressed={index === 0}>
+                {category}
+              </button>
+            ))
+          }
+        </div><p id="filter-status" class="sr-only" role="status" aria-live="polite">
+          {projects.length} projects
+        </p><div class="work-grid portfolio-grid" id="portfolio-grid">
+          {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+        </div><p class="portfolio-note">
+          Selected work by Brooks Geospatial and Davis “Mac” Brooks. Professional GIS work completed at
+          Capitol Market Research is credited on the project page.
+        </p>
+      </div>
+    </section>
+    <ProjectCTA />
+  </main><Footer />
 </Layout>
+<script>
+  const filters = document.querySelectorAll<HTMLButtonElement>("[data-filter]");
+  const cards = document.querySelectorAll<HTMLElement>("#portfolio-grid .work-card");
+  const status = document.querySelector<HTMLElement>("#filter-status");
+  filters.forEach((button) =>
+    button.addEventListener("click", () => {
+      filters.forEach((filter) => filter.setAttribute("aria-pressed", String(filter === button)));
+      let count = 0;
+      cards.forEach((card) => {
+        card.hidden = button.dataset.filter !== "All work" && button.dataset.filter !== card.dataset.category;
+        if (!card.hidden) count++;
+      });
+      if (status)
+        status.textContent = `${count} ${count === 1 ? "project" : "projects"} shown for ${button.dataset.filter}.`;
+    }),
+  );
+</script>

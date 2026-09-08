@@ -1,0 +1,47 @@
+<div class="globe-stage" id="data-globe">
+  <div class="globe-orbit orbit-one" aria-hidden="true"></div>
+  <div class="globe-orbit orbit-two" aria-hidden="true"></div>
+  <span class="globe-cross cross-one" aria-hidden="true">+</span><span
+    class="globe-cross cross-two"
+    aria-hidden="true">+</span
+  >
+  <div class="globe-coordinate coordinate-top" aria-hidden="true">N 29.91° &nbsp; W 96.88°</div>
+  <div class="globe-fallback" aria-hidden="true">
+    <svg viewBox="0 0 400 400" fill="none"
+      ><circle cx="200" cy="200" r="178" fill="#002c51"></circle><g stroke="#6ca9cb" stroke-width="1"
+        ><ellipse cx="200" cy="200" rx="178" ry="62"></ellipse><ellipse cx="200" cy="200" rx="178" ry="127"
+        ></ellipse><ellipse cx="200" cy="200" rx="65" ry="178"></ellipse><ellipse
+          cx="200"
+          cy="200"
+          rx="132"
+          ry="178"></ellipse><path d="M22 200h356M200 22v356"></path></g
+      ><path
+        d="m74 116 44-35 52 11 17 35-29 21-9 34 21 27 17 10 9 31 27 23-8 33-31 33-17-25 1-51-24-28-31-20-15-37-36-24Z"
+        fill="#70a8c3"
+        opacity=".6"></path></svg
+    >
+  </div>
+  <canvas
+    class="globe-canvas"
+    aria-label="Interactive 3D globe with geographic data layers. Drag to rotate or use the arrow keys."
+    tabindex="0"
+    role="img"
+    aria-describedby="globe-instructions"></canvas>
+  <div class="globe-location">
+    <span class="location-dot"></span><div>CENTRAL TEXAS<span>Local knowledge. A wider view.</span></div>
+  </div>
+  <div class="globe-bottom">
+    <span id="globe-instructions">Drag to explore <span aria-hidden="true">↔</span></span><button
+      type="button"
+      id="globe-motion"
+      aria-label="Pause globe rotation"
+      hidden>Pause rotation <span aria-hidden="true">Ⅱ</span></button
+    >
+  </div>
+  <span class="globe-caption">GEOGRAPHIC DATA / ILLUSTRATIVE VIEW</span>
+</div>
+<script>
+  import { initGlobe } from "../lib/globe";
+  const root = document.querySelector<HTMLElement>("#data-globe");
+  if (root) initGlobe(root);
+</script>

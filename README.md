@@ -1,15 +1,17 @@
 # Brooks Geospatial
 
-Static Astro site for Brooks Geospatial, focused on geospatial AI evaluation and GIS quality assurance.
+A static Astro website for Brooks Geospatial’s GIS mapping, spatial analysis, drone imagery, commercial media, and site documentation work in Central Texas.
 
-## Local development
+## Development
+
+Use Node.js 20.19.5 or newer.
 
 ```sh
 npm install
 npm run dev
 ```
 
-## Quality checks
+## Checks
 
 ```sh
 npm run format:check
@@ -19,25 +21,20 @@ npm run check
 npm run build
 ```
 
-## Resume downloads
+## Content
 
-The human-readable resume is available at `/resume`. The PDF and DOCX downloads are generated from the same fact-limited source with:
-
-```sh
-npm run generate:resume
-```
-
-The download URLs live in `src/data/site.mjs`.
-
-## Content and configuration
-
-- `src/data/site.mjs` contains public contact, social, phone-visibility, metadata, and resume-download settings.
-- `src/data/projects.mjs` contains the project cards and static project-detail routes.
-- Projects must remain `in-progress` until public, non-confidential evidence supports a `published` status.
-- Do not put client documents, branded client maps, or private imagery in `public/`. Legacy material is kept in `private/legacy-assets/` and `private/legacy-source/`, neither of which is deployed.
+- `src/data/site.mjs`: public contact details and metadata.
+- `src/data/projects.mjs`: portfolio copy, categories, imagery, and galleries.
+- `CONTENT-SOURCES.md`: recovered source history and attribution.
+- `scripts/restore-portfolio.mjs`: reproducible image recovery from the original Git history and globe geography preparation.
+- `src/lib/globe.ts`: interactive Three.js globe. Supports dragging, keyboard arrows, pause/resume, reduced motion, and a static fallback when WebGL is unavailable. Pauses outside the viewport.
+- Photos are served locally as optimized WebP files; fonts and globe geography are hosted locally.
+- The contact form retains the existing FormSubmit endpoint with native validation fallback, bounded request timeout, and a direct email alternative. Live delivery depends on the existing recipient activation at FormSubmit.
 
 ## Deployment
 
-The GitHub Actions workflow deploys the static `dist/` output to GitHub Pages on pushes to `main`. Review this branch, merge it to `main`, and verify the GitHub Pages deployment.
+The existing GitHub Actions workflow builds `dist/` and publishes it to GitHub Pages after a push to `main`. The company’s domain and hosting arrangement are preserved.
 
-`/portfolio` and `/commercial-drone-media` use static redirect pages because GitHub Pages does not provide repository-level HTTP 301 rules. If the domain is later placed behind a proxy or another host, configure permanent 301 redirects there for those two paths.
+Old AI/evaluation routes and `/projects` use static redirect pages to the new services and portfolio, since GitHub Pages does not support repository-level HTTP redirect rules. Redirect pages are excluded from the sitemap. `/portfolio` and `/commercial-drone-media` are full pages again.
+
+Unselected legacy assets, client proposals, and private source files stay in `private/` and are not published.

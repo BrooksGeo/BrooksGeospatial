@@ -1,0 +1,96 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
+import ProjectCTA from "../components/ProjectCTA.astro";
+import Icon from "../components/Icon.astro";
+const services = [
+  {
+    id: "gis-mapping",
+    eyebrow: "01 / GIS & spatial analysis",
+    title: "Put your data on the map.",
+    image: "parcel-map",
+    alt: "Parcel classification map of La Grange, Texas",
+    description:
+      "Make complex location information easier to understand. We combine map production, geocoding, spatial data management, and market research to help you see relationships and make informed decisions.",
+    items: ["GIS & cartography", "Parcel mapping", "Spatial analysis", "Market & demographic research"],
+    href: "/gis-mapping",
+    link: "Explore GIS & mapping",
+  },
+  {
+    id: "aerial-imagery",
+    eyebrow: "02 / Drone photography & media",
+    title: "A view you can’t get from the ground.",
+    image: "country-club-green",
+    alt: "Drone image of a golf green and surrounding water",
+    description:
+      "Bring a property, business, or venue to life with aerial photography, drone video, and ground-level imagery. Media packages are planned around where the finished work will appear, from your website to social media.",
+    items: ["Drone photography", "Aerial video", "Real estate & land media", "Commercial media packages"],
+    href: "/commercial-drone-media",
+    link: "Explore aerial imagery",
+  },
+  {
+    id: "site-documentation",
+    eyebrow: "03 / Properties & infrastructure",
+    title: "Keep the whole site in sight.",
+    image: "utility-imagery",
+    alt: "Utility infrastructure photographed from the air",
+    description:
+      "Document construction progress, properties, and utility infrastructure from an aerial perspective. Clear imagery gives teams a shared view of the site and a visual record to refer back to.",
+    items: ["Site documentation", "Construction progress", "Infrastructure imagery", "Property overviews"],
+    href: "/contact?service=Site%20documentation",
+    link: "Discuss your site",
+  },
+];
+---
+
+<Layout
+  title="GIS & Drone Services | Brooks Geospatial"
+  description="GIS mapping, spatial analysis, drone photography, commercial media, and site documentation in Fayette County and Central Texas."
+>
+  <Navbar /><main id="main-content">
+    <PageHero
+      eyebrow="Our services"
+      title="Your world. In greater detail."
+      description="From the data on your desk to the landscape beyond it, we help you see the connections. Practical geospatial and drone services, shaped around your project."
+    />
+    <div class="container">
+      {
+        services.map((service) => (
+          <section class="services-detail" id={service.id}>
+            <>
+              <figure>
+                <img
+                  src={`/images/work/${service.image}.webp`}
+                  alt={service.alt}
+                  width="1200"
+                  height="900"
+                  loading="lazy"
+                  class:list={{ contain: service.id === "gis-mapping" }}
+                />
+              </figure>
+              <div>
+                <>
+                  <p class="eyebrow">{service.eyebrow}</p>
+                  <h2>{service.title}</h2>
+                  <p>{service.description}</p>
+                  <ul class="deliverable-list">
+                    {service.items.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                  <a href={service.href} class="text-link">
+                    {service.link}
+                    <Icon name="northeast" size={18} />
+                  </a>
+                </>
+              </div>
+            </>
+          </section>
+        ))
+      }
+    </div>
+    <ProjectCTA />
+  </main><Footer />
+</Layout>

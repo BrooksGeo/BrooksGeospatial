@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+interface Props {
+  to: string;
+  label: string;
+}
+const { to, label } = Astro.props;
+---
+
+<Layout
+  title={`${label} | Brooks Geospatial`}
+  description={`Explore ${label.toLowerCase()} at Brooks Geospatial.`}
+  redirectTo={to}
+  noindex
+  ><main id="main-content" class="container not-found">
+    <p class="eyebrow">Brooks Geospatial</p><h1>This page has moved.</h1><a
+      class="button button-dark"
+      href={to}>Continue to {label.toLowerCase()} →</a
+    >
+  </main></Layout
+>

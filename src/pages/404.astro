@@ -2,34 +2,23 @@
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
+import Icon from "../components/Icon.astro";
 ---
 
 <Layout
   title="Page Not Found | Brooks Geospatial"
-  description="The requested Brooks Geospatial page could not be found."
+  description="Find your way back to Brooks Geospatial’s maps, imagery, and services."
   noindex
 >
-  <Navbar />
-  <main id="main-content" class="map-grid flex min-h-[65vh] items-center bg-[#0b2230] px-4 py-16 sm:px-6">
-    <div class="mx-auto max-w-3xl">
-      <p class="font-mono text-sm font-bold text-[#8de6da]">404</p><h1
-        class="mt-5 text-4xl font-bold tracking-tight text-[#f6f2ea] sm:text-5xl"
+  <Navbar /><main id="main-content" class="container not-found">
+    <p class="eyebrow">404 / A little off the map</p><h1>Let’s find your way back.</h1><p>
+      This page may have moved. Explore our services or return to the homepage to find the perspective you’re
+      looking for.
+    </p><div class="hero-actions">
+      <a class="button button-dark" href="/">Back to home<Icon name="arrow" size={18} /></a><a
+        class="text-link"
+        href="/portfolio">View our work</a
       >
-        This spatial reference does not resolve.
-      </h1><p class="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
-        The page may have moved during the Brooks Geospatial update. Use the projects page or return home.
-      </p><div class="mt-8 flex flex-col gap-3 sm:flex-row">
-        <a
-          href="/"
-          class="inline-flex min-h-12 items-center justify-center bg-[#238e89] px-6 py-3 font-bold text-white hover:bg-[#2ab7a9]"
-          >Back to home</a
-        ><a
-          href="/projects"
-          class="inline-flex min-h-12 items-center justify-center border border-[#8de6da]/70 px-6 py-3 font-bold text-[#f6f2ea] hover:bg-white/10"
-          >View projects</a
-        >
-      </div>
     </div>
-  </main>
-  <Footer />
+  </main><Footer />
 </Layout>
