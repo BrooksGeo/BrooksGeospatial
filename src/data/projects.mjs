@@ -68,16 +68,16 @@ export const projects = Object.freeze([
   },
   {
     slug: "parcel-mapping",
-    title: "Making market data readable",
+    title: "Making parcel data readable",
     category: "GIS & mapping",
-    location: "Central Texas",
-    image: "household-map",
-    alt: "Choropleth map showing projected households by geographic area",
+    location: "La Grange, Texas",
+    image: "parcel-map",
+    alt: "Thematic parcel map of La Grange, Texas, with a legend and north arrow",
     summary:
-      "A thematic map that turns household projections into an organized view of market geography.",
+      "A thematic map that turns parcel-level information into an organized view of the local landscape.",
     description:
-      "GIS connects individual records to real locations. This map uses a clear classification scheme, a legend, and geographic context to help readers see patterns across the study area.",
-    deliverables: ["Demographic mapping", "Data visualization", "Map production"],
+      "GIS connects individual records to real locations. This La Grange parcel map uses a clear classification scheme, a legend, and geographic context to help readers see patterns across the town.",
+    deliverables: ["Parcel mapping", "Data visualization", "Map production"],
     gallery: [],
   },
   {
