@@ -1,0 +1,109 @@
+---
+import { site } from "../data/site.mjs";
+import Icon from "./Icon.astro";
+const endpoint = `https://formsubmit.co/ajax/${site.contact.email}`;
+const fallback = `https://formsubmit.co/${site.contact.email}`;
+const useOptions = [
+  "Listing or buyer education",
+  "Land purchase or investment",
+  "Commercial or development research",
+  "Consulting or engineering scoping",
+  "Understanding my property",
+  "Other",
+];
+---
+
+<form id="property-report-form" action={fallback} method="POST" data-endpoint={endpoint} class="contact-form property-report-form">
+  <input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden aria-hidden="true" />
+  <input type="hidden" name="_captcha" value="false" />
+  <input type="hidden" name="_subject" value="Property Intelligence Report request" />
+  <div class="form-row">
+    <label for="report-name">Name <span aria-hidden="true">*</span></label>
+    <input id="report-name" name="name" autocomplete="name" required minlength="2" maxlength="120" placeholder="First and last name" />
+  </div>
+  <div class="form-row">
+    <label for="report-email">Email <span aria-hidden="true">*</span></label>
+    <input id="report-email" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@company.com" />
+  </div>
+  <div class="form-row">
+    <label for="report-phone">Phone <span class="field-optional">(optional)</span></label>
+    <input id="report-phone" name="phone" type="tel" autocomplete="tel" maxlength="40" placeholder="(555) 555-5555" />
+  </div>
+  <div class="form-row">
+    <label for="report-address">Property address <span aria-hidden="true">*</span></label>
+    <input id="report-address" name="property_address" autocomplete="street-address" required maxlength="300" placeholder="Address, city, and state" />
+  </div>
+  <div class="form-row form-row-split">
+    <div>
+      <label for="report-apn">Parcel ID / APN <span class="field-optional">(optional)</span></label>
+      <input id="report-apn" name="parcel_id" maxlength="100" placeholder="Parcel or account number" />
+    </div>
+    <div>
+      <label for="report-listing">Listing URL <span class="field-optional">(optional)</span></label>
+      <input id="report-listing" name="listing_url" type="url" maxlength="1000" placeholder="https://" />
+    </div>
+  </div>
+  <div class="form-row">
+    <label for="report-use">What are you using the report for? <span aria-hidden="true">*</span></label>
+    <select id="report-use" name="intended_use" required>
+      <option value="" disabled selected>Select one</option>
+      {useOptions.map((option) => <option value={option}>{option}</option>)}
+    </select>
+  </div>
+  <div class="form-row">
+    <label for="report-notes">Additional notes <span class="field-optional">(optional)</span></label>
+    <textarea id="report-notes" name="notes" rows="4" maxlength="5000" placeholder="Anything helpful about the property or your decision."></textarea>
+  </div>
+  <button type="submit" class="button button-dark"><span>Request a Property Report</span><Icon name="northeast" size={18} /></button>
+  <p id="property-report-status" class="form-status" role="status" aria-live="polite"></p>
+  <p class="form-footnote">Prefer email? <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></p>
+</form>
+
+<script>
+  import { trackAnalytics } from "../lib/analytics";
+  const form = document.querySelector<HTMLFormElement>("#property-report-form");
+  const status = document.querySelector<HTMLElement>("#property-report-status");
+  const submitButton = form?.querySelector<HTMLButtonElement>("button[type='submit']");
+  const buttonLabel = submitButton?.querySelector("span");
+  let started = false;
+  form?.addEventListener("focusin", () => {
+    if (!started) {
+      trackAnalytics("property_report_form_start");
+      started = true;
+    }
+  });
+  if (form) form.noValidate = true;
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!form.checkValidity()) {
+      if (status) status.textContent = "Please complete your name, email, property address, and intended use.";
+      form.reportValidity();
+      return;
+    }
+    if (!submitButton || !status || !buttonLabel || submitButton.disabled) return;
+    submitButton.disabled = true;
+    buttonLabel.textContent = "Sending…";
+    status.textContent = "Sending your request…";
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 15000);
+    try {
+      const response = await fetch(form.dataset.endpoint ?? form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+        signal: controller.signal,
+      });
+      const result = await response.json();
+      if (!response.ok || (result.success !== true && result.success !== "true")) throw new Error("Report request not accepted");
+      form.reset();
+      status.textContent = "Thanks — your request has been sent. We’ll review the available data and follow up.";
+      trackAnalytics("property_report_form_submission");
+    } catch {
+      status.textContent = "Your request could not be sent right now. Please email mac@brooksgeospatial.com instead. Your details are still here.";
+    } finally {
+      window.clearTimeout(timeout);
+      submitButton.disabled = false;
+      buttonLabel.textContent = "Request a Property Report";
+    }
+  });
+</script>

@@ -4,6 +4,26 @@
  */
 export const projects = Object.freeze([
   {
+    slug: "property-intelligence",
+    title: "Property Intelligence",
+    headline: "Turning scattered property data into one clear report.",
+    category: "Property intelligence",
+    location: "Georgetown, Texas",
+    image: "property-intelligence",
+    imageExt: "png",
+    alt: "Property Intelligence Report showing parcel and FEMA flood screening for a Georgetown property",
+    summary:
+      "Parcel information, aerial imagery, mapped FEMA conditions, measured spatial analysis, and source documentation assembled into a concise property-specific research package.",
+    description:
+      "The sample report brings relevant public GIS research into a clear, property-specific deliverable. It combines a property snapshot, aerial and parcel mapping, measured FEMA conditions, source documentation, and practical limitations for preliminary land research.",
+    deliverables: ["Property snapshot", "Aerial & parcel mapping", "FEMA flood analysis", "Source documentation"],
+    gallery: [
+      { image: "property-intelligence-aerial", imageExt: "png", alt: "Aerial and parcel map from the Property Intelligence sample report" },
+      { image: "property-intelligence-fema", imageExt: "png", alt: "FEMA analysis map from the Property Intelligence sample report" },
+    ],
+    sampleReport: "/downloads/Brooks_Geospatial_Property_Intelligence_Sample.pdf",
+  },
+  {
     slug: "country-club-media",
     title: "A fresh perspective on the club",
     category: "Aerial imagery",

@@ -16,6 +16,8 @@ export function getStaticPaths() {
   ];
 }
 const { project } = Astro.props;
+const imageExt = project?.imageExt ?? "webp";
+const getPhotoImageExt = (photo: { image: string; alt: string; imageExt?: string }) => photo.imageExt ?? imageExt;
 const structuredData = project
   ? {
       "@context": "https://schema.org",
@@ -39,7 +41,7 @@ const structuredData = project
     <Layout
       title={`${project.title} | Brooks Geospatial`}
       description={project.summary}
-      image={`/images/work/${project.image}.webp`}
+      image={`/images/work/${project.image}.${imageExt}`}
       structuredData={structuredData}
     >
       <>
@@ -61,7 +63,7 @@ const structuredData = project
                   <span class="accent-dot" />
                   {project.category} / {project.location}
                 </p>
-                <h1>{project.title}</h1>
+                <h1>{project.headline ?? project.title}</h1>
                 <p>{project.summary}</p>
               </>
             </div>
@@ -73,7 +75,7 @@ const structuredData = project
                   class:list={["project-hero-image", { "is-map": project.category === "GIS & mapping" }]}
                 >
                   <img
-                    src={`/images/work/${project.image}.webp`}
+                    src={`/images/work/${project.image}.${imageExt}`}
                     alt={project.alt}
                     width="1800"
                     height="1200"
@@ -95,6 +97,7 @@ const structuredData = project
                     </div>
                     <div>
                       <p>{project.description}</p>
+                      {project.sampleReport && <p><a class="text-link" href={project.sampleReport} target="_blank" rel="noopener">View Sample Report <Icon name="northeast" size={17} /></a></p>}
                       {project.attribution && <p class="attribution">{project.attribution}</p>}
                       {project.note && <p class="project-note">{project.note}</p>}
                     </div>
@@ -105,13 +108,13 @@ const structuredData = project
                 <div class="photo-gallery">
                   {project.gallery.map((photo) => (
                     <a
-                      href={`/images/work/${photo.image}.webp`}
+                      href={`/images/work/${photo.image}.${getPhotoImageExt(photo)}`}
                       class:list={["gallery-item", { "is-map": project.category === "GIS & mapping" }]}
                       data-gallery
                       aria-label={`Enlarge: ${photo.alt}`}
                     >
                       <img
-                        src={`/images/work/${photo.image}-small.webp`}
+                        src={`/images/work/${photo.image}-small.${getPhotoImageExt(photo)}`}
                         alt={photo.alt}
                         width="800"
                         height="600"

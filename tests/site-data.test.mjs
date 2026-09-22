@@ -10,12 +10,13 @@ test("portfolio routes are unique and every referenced image is available", () =
   for (const project of projects) {
     assert.match(project.slug, /^[a-z0-9-]+$/);
     assert.ok(project.summary.length > 40);
-    assert.ok(["GIS & mapping", "Aerial imagery", "Site documentation"].includes(project.category));
+    assert.ok(["Property intelligence", "GIS & mapping", "Aerial imagery", "Site documentation"].includes(project.category));
     for (const image of [project.image, ...project.gallery.map((photo) => photo.image)]) {
+      const extension = image === project.image ? project.imageExt ?? "webp" : project.gallery.find((photo) => photo.image === image)?.imageExt ?? project.imageExt ?? "webp";
       for (const suffix of ["", "-small"]) {
         assert.ok(
-          existsSync(new URL(`../public/images/work/${image}${suffix}.webp`, import.meta.url)),
-          `Missing image: ${image}${suffix}`,
+          existsSync(new URL(`../public/images/work/${image}${suffix}.${extension}`, import.meta.url)),
+          `Missing image: ${image}${suffix}.${extension}`,
         );
       }
     }

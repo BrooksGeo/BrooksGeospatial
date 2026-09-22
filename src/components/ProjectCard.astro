@@ -5,12 +5,13 @@ interface Props {
   index?: number;
 }
 const { project, index = 0 } = Astro.props;
+const imageExt = project.imageExt ?? "webp";
 ---
 
 <article class="work-card" data-category={project.category}>
   <a href={`/projects/${project.slug}`} class="work-image" aria-label={`View project: ${project.title}`}>
     <img
-      src={`/images/work/${project.image}-small.webp`}
+      src={`/images/work/${project.image}-small.${imageExt}`}
       alt={project.alt}
       width="800"
       height="540"
