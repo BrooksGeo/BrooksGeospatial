@@ -9,7 +9,7 @@ export const projects = Object.freeze([
     headline: "Turning scattered property data into one clear report.",
     category: "Property intelligence",
     location: "Georgetown, Texas",
-    image: "property-intelligence",
+    image: "property-intelligence-report-cover",
     imageExt: "png",
     alt: "Property Intelligence Report showing parcel and FEMA flood screening for a Georgetown property",
     summary:
@@ -18,8 +18,8 @@ export const projects = Object.freeze([
       "The sample report brings relevant public GIS research into a clear, property-specific deliverable. It combines a property snapshot, aerial and parcel mapping, measured FEMA conditions, source documentation, and practical limitations for preliminary land research.",
     deliverables: ["Property snapshot", "Aerial & parcel mapping", "FEMA flood analysis", "Source documentation"],
     gallery: [
-      { image: "property-intelligence-aerial", imageExt: "png", alt: "Aerial and parcel map from the Property Intelligence sample report" },
-      { image: "property-intelligence-fema", imageExt: "png", alt: "FEMA analysis map from the Property Intelligence sample report" },
+      { image: "property-intelligence-report-aerial", imageExt: "png", alt: "Aerial and parcel map from the current Property Intelligence sample report" },
+      { image: "property-intelligence-report-fema", imageExt: "png", alt: "FEMA analysis map from the current Property Intelligence sample report" },
     ],
     sampleReport: "/downloads/Brooks_Geospatial_Property_Intelligence_Sample.pdf",
   },
